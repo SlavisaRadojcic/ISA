@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ftn.isa.model.Destination;
+import com.ftn.isa.model.Friend;
 
 @Repository
-public interface DestinationRepository extends JpaRepository<Destination, Long>{
+public interface FriendRepository extends JpaRepository<Friend, Long> {
 
-	List<Destination> findByAirplaneCompanyId(long id);
+	List<Friend> getByUserId(long userId);
 }

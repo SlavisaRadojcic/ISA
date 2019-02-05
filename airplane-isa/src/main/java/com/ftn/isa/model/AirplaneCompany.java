@@ -1,10 +1,14 @@
 package com.ftn.isa.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -26,11 +30,7 @@ public class AirplaneCompany {
 	private String promoDescription;
 	@Column(name = "avrage_rate")
 	private double avrageRate;
-	//TODO
-	//Informacije o letu
-//	private List<Destination> destinations = new ArrayList<Destination>();
-	
-	
-//	private List<Flight> flights = new ArrayList<Flight>();
+	@OneToMany(mappedBy = "airplaneCompany")
+	private List<Destination> destinations = new ArrayList<Destination>();
 	
 }

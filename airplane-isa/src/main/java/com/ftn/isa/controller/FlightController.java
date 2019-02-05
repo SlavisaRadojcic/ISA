@@ -13,36 +13,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftn.isa.model.AirplaneCompany;
-import com.ftn.isa.service.AirplaneCompanyServiceImpl;
+import com.ftn.isa.model.Flight;
+import com.ftn.isa.service.FlightService;
 
 @RestController
-@RequestMapping("/api/airplane-companies")
-public class AirplaneCompanyController {
+@RequestMapping("/api/flight")
+public class FlightController {
 	
 	@Autowired
-	AirplaneCompanyServiceImpl airplaneCompanyService;
-
+	FlightService flightService;
+	
 	@GetMapping
-	public List<AirplaneCompany> getAllAirplaneCompanies() {
-		return airplaneCompanyService.getAll();
+	public List<Flight> getAllAirplaneCompanies() {
+		return flightService.getAll();
 	}
 	
 	@PostMapping
 	@PreAuthorize("hasRole('ADMIN')")
-	public AirplaneCompany saveAirplaneCompany(@RequestBody AirplaneCompany airplaneCompany) {
-		return airplaneCompanyService.save(airplaneCompany);
+	public Flight saveAirplaneCompany(@RequestBody Flight flight) {
+		return flightService.save(flight);
 	}
 	
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public void deleteAirplaneCompany(@PathVariable long id) {
-		airplaneCompanyService.delete(id);
+		flightService.delete(id);
 	}
 	
 	@PutMapping
 	@PreAuthorize("hasRole('ADMIN')")
-	public AirplaneCompany editAirplaneCompany(@RequestBody AirplaneCompany airplaneCompany) {
-		return airplaneCompanyService.save(airplaneCompany);
+	public Flight editAirplaneCompany(@RequestBody Flight flight) {
+		return flightService.save(flight);
 	}
 }
