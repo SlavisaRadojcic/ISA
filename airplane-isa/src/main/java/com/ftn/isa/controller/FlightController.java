@@ -30,13 +30,13 @@ public class FlightController {
 	
 	@PostMapping
 	@PreAuthorize("hasRole('ADMIN')")
-	public Flight saveAirplaneCompany(@RequestBody Flight flight) {
+	public Flight saveFlight(@RequestBody Flight flight) {
 		return flightService.save(flight);
 	}
 	
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
-	public void deleteAirplaneCompany(@PathVariable long id) {
+	public void deleteFlight(@PathVariable long id) {
 		flightService.delete(id);
 	}
 	
@@ -44,5 +44,11 @@ public class FlightController {
 	@PreAuthorize("hasRole('ADMIN')")
 	public Flight editAirplaneCompany(@RequestBody Flight flight) {
 		return flightService.save(flight);
+	}
+	
+	@PostMapping("/vote/{flightId}/{rate}")
+	@PreAuthorize("hasRole('USER')")
+	public Flight vote(@PathVariable long flightId, @PathVariable double rate) {
+		return flightService.vote(flightId, rate);
 	}
 }

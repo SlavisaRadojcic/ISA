@@ -1,14 +1,16 @@
 package com.ftn.isa.security;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ftn.isa.model.User;
 
 public class UserPrincipal implements UserDetails {
@@ -16,25 +18,34 @@ public class UserPrincipal implements UserDetails {
 
 	private Long id;
 
-	private String name;
-
-	private String username;
+	private String firstName;
+	
+	private String lastName;
 
 	@JsonIgnore
 	private String email;
 
 	@JsonIgnore
 	private String password;
+	
+	private Date dateOfBirth;
+	
+	private String phoneNumber;
+	
+	private boolean firstTimeLogin;
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserPrincipal(Long id, String name, String username, String email, String password,
-			Collection<? extends GrantedAuthority> authorities) {
+	public UserPrincipal(Long id, String firstName, String lastName, String email, String password, Date dateOfBirth,
+			String phoneNumber, boolean firstTimeLogin, Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
-		this.name = name;
-		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		this.dateOfBirth = dateOfBirth;
+		this.phoneNumber = phoneNumber;
+		this.firstTimeLogin = firstTimeLogin;
 		this.authorities = authorities;
 	}
 
@@ -42,16 +53,20 @@ public class UserPrincipal implements UserDetails {
 		List<GrantedAuthority> authorities = user.getRoles().stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName().name())).collect(Collectors.toList());
 
-		return new UserPrincipal(user.getId(), user.getName(), user.getUsername(), user.getEmail(), user.getPassword(),
-				authorities);
+		return new UserPrincipal(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(),
+				user.getDateOfBirth(), user.getPhoneNumber(), user.isFirstTimeLogin(), authorities);
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
 	}
 
 	public String getEmail() {
@@ -59,13 +74,20 @@ public class UserPrincipal implements UserDetails {
 	}
 
 	@Override
-	public String getUsername() {
-		return username;
-	}
-
-	@Override
 	public String getPassword() {
 		return password;
+	}
+	
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public boolean isFirstTimeLogin() {
+		return firstTimeLogin;
 	}
 
 	@Override
@@ -107,5 +129,11 @@ public class UserPrincipal implements UserDetails {
 	public int hashCode() {
 
 		return Objects.hash(id);
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

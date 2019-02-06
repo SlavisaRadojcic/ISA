@@ -34,5 +34,18 @@ public class FlightServiceImpl implements FlightService {
 		flightRepository.deleteById(id);
 	}
 
+	@Override
+	public Flight vote(long flightId, double rate) {
+		Flight flight = flightRepository.getOne(flightId);
+		
+		if(flight.getAvrageRate() == 0) {
+			flight.setAvrageRate(rate);
+		} else {
+			flight.setAvrageRate((flight.getAvrageRate() + rate) / 2);
+		}
+		
+		return flightRepository.save(flight);
+	}
+
 	
 }

@@ -18,7 +18,6 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "friend")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Friend {
 
 	@Id
@@ -29,8 +28,7 @@ public class Friend {
 	@Column(name = "status")
 	private String status;
 
-	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_user")
 	private User user;
 }

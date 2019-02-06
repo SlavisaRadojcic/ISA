@@ -13,4 +13,6 @@ public interface FlightService {
 	Flight getById(long id);
 	
 	void delete(long id);
+	
+	Flight vote(long flightId, double rate);
 }

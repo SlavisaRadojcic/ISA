@@ -33,6 +33,19 @@ public class AirplaneCompanyServiceImpl implements AirplaneCompanyService {
 	public AirplaneCompany getById(long id) {
 		return airplaneCompanyRepository.getOne(id);
 	}
+
+	@Override
+	public AirplaneCompany vote(long companyId, double rate) {
+		AirplaneCompany company = airplaneCompanyRepository.getOne(companyId);
+		
+		if(company.getAvrageRate() == 0) {
+			company.setAvrageRate(rate);
+		} else {
+			company.setAvrageRate((company.getAvrageRate() + rate) / 2);
+		}
+		
+		return airplaneCompanyRepository.save(company);
+	}
 	
 	
 }

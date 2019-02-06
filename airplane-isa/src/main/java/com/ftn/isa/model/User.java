@@ -1,6 +1,7 @@
 package com.ftn.isa.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,13 +30,29 @@ public class User {
     @Column(name = "id")
 	private long id;
 	
-	private String name;
+	@Column(name = "first_name")
+	private String firstName;
 	
-	private String username;
+	@Column(name = "last_name")
+	private String lastName;
 	
+	@Column(name = "username")
+	private String userName;
+	
+	@Column(name = "email")
 	private String email;
 	
+	@Column(name = "password")
 	private String password;
+	
+	@Column(name = "date_of_birth")
+	private Date dateOfBirth;
+	
+	@Column(name = "phone_number")
+	private String phoneNumber;
+	
+	@Column(name = "first_time_login")
+	private boolean firstTimeLogin;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -50,11 +67,14 @@ public class User {
 		super();
 	}
 	
-	public User(String name, String username, String email, String password) {
-		this.name = name;
-		this.username = username;
+	public User(String firstName, String lastName, String email, String password, Date dateOfBirth, String phoneNumber, boolean firstTimeLogin) {
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		this.dateOfBirth = dateOfBirth;
+		this.phoneNumber = phoneNumber;
+		this.firstTimeLogin = firstTimeLogin;
 	}
 
 }

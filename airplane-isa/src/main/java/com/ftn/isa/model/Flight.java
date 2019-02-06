@@ -49,6 +49,9 @@ public class Flight {
 	@Column(name = "ticket_price")
 	private double ticketPrice;
 	
+	@Column(name = "avrage_rate")
+	private double avrageRate;
+	
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_destination")

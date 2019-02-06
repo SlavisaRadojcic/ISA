@@ -45,4 +45,10 @@ public class AirplaneCompanyController {
 	public AirplaneCompany editAirplaneCompany(@RequestBody AirplaneCompany airplaneCompany) {
 		return airplaneCompanyService.save(airplaneCompany);
 	}
+	
+	@PostMapping("/vote/{companyId}/{rate}")
+	@PreAuthorize("hasRole('USER')")
+	public AirplaneCompany saveAirplaneCompany(@PathVariable long companyId, @PathVariable double rate) {
+		return airplaneCompanyService.vote(companyId, rate);
+	}
 }

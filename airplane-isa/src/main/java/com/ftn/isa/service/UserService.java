@@ -5,4 +5,6 @@ import com.ftn.isa.model.User;
 public interface UserService {
 
 	User getUserById(long id);
+	
+	User save(User user);
 }

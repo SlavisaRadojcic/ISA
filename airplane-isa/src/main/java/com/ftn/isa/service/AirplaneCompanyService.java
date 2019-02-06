@@ -14,4 +14,5 @@ public interface AirplaneCompanyService {
 	
 	AirplaneCompany getById(long id);
 	
+	AirplaneCompany vote(long companyId, double rate);
 }
