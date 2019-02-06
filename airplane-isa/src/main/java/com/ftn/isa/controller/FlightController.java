@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftn.isa.model.Flight;
+import com.ftn.isa.payload.FlightRequest;
+import com.ftn.isa.payload.FlightResponse;
 import com.ftn.isa.service.FlightService;
 
 @RestController
@@ -24,14 +25,14 @@ public class FlightController {
 	FlightService flightService;
 	
 	@GetMapping
-	public List<Flight> getAllAirplaneCompanies() {
+	public List<FlightResponse> getAllAirplaneCompanies() {
 		return flightService.getAll();
 	}
 	
 	@PostMapping
 	@PreAuthorize("hasRole('ADMIN')")
-	public Flight saveFlight(@RequestBody Flight flight) {
-		return flightService.save(flight);
+	public FlightResponse saveFlight(@RequestBody FlightRequest flightRequest) {
+		return flightService.save(flightRequest);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -42,13 +43,13 @@ public class FlightController {
 	
 	@PutMapping
 	@PreAuthorize("hasRole('ADMIN')")
-	public Flight editAirplaneCompany(@RequestBody Flight flight) {
-		return flightService.save(flight);
+	public FlightResponse editAirplaneCompany(@RequestBody FlightRequest flightRequest) {
+		return flightService.save(flightRequest);
 	}
 	
 	@PostMapping("/vote/{flightId}/{rate}")
 	@PreAuthorize("hasRole('USER')")
-	public Flight vote(@PathVariable long flightId, @PathVariable double rate) {
+	public FlightResponse vote(@PathVariable long flightId, @PathVariable double rate) {
 		return flightService.vote(flightId, rate);
 	}
 }

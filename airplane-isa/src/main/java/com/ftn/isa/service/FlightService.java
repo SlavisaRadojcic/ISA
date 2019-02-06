@@ -2,17 +2,18 @@ package com.ftn.isa.service;
 
 import java.util.List;
 
-import com.ftn.isa.model.Flight;
+import com.ftn.isa.payload.FlightRequest;
+import com.ftn.isa.payload.FlightResponse;
 
 public interface FlightService {
 
-	List<Flight> getAll();
+	List<FlightResponse> getAll();
 	
-	Flight save(Flight flight);
+	FlightResponse save(FlightRequest flightRequest);
 	
-	Flight getById(long id);
+	FlightResponse getById(long id);
 	
 	void delete(long id);
 	
-	Flight vote(long flightId, double rate);
+	FlightResponse vote(long flightId, double rate);
 }

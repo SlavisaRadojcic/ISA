@@ -31,6 +31,12 @@ public class Flight {
     @Column(name = "id")
 	private long id;
 	
+	@Column(name = "starting_point")
+	private String startingPoint;
+	
+	@Column(name = "ending_point")
+	private String endingPoint;
+	
 	@Column(name = "date_of_take_off")
 	private Date dateOfTakeOff;
 	
@@ -38,7 +44,10 @@ public class Flight {
 	private Date dateOfLanding;
 	
 	@Column(name = "time_of_flight")
-	private double timeOfFlight;
+	private int timeOfFlight;
+	
+	@Column(name = "distance_of_flight")
+	private int distanceOfFlight;
 	
 	@Column(name = "number_of_transfer")
 	private int numberOfTransfers;
@@ -49,6 +58,9 @@ public class Flight {
 	@Column(name = "ticket_price")
 	private double ticketPrice;
 	
+	@Column(name = "discount")
+	private int discount;
+	
 	@Column(name = "avrage_rate")
 	private double avrageRate;
 	
@@ -58,7 +70,47 @@ public class Flight {
 	private Destination destination;
 	
 	@OneToMany(mappedBy = "flight")
-	private List<Ticket> tickets = new ArrayList<Ticket>();
+	private List<Seat> seats = new ArrayList<Seat>();
+
+	public Flight(long id, String startingPoint, String endingPoint, Date dateOfTakeOff, Date dateOfLanding,
+			int timeOfFlight, int distanceOfFlight, int numberOfTransfers, String locationOfTransfer,
+			double ticketPrice, int discount, double avrageRate, Destination destination, List<Seat> seats) {
+		super();
+		this.id = id;
+		this.startingPoint = startingPoint;
+		this.endingPoint = endingPoint;
+		this.dateOfTakeOff = dateOfTakeOff;
+		this.dateOfLanding = dateOfLanding;
+		this.timeOfFlight = timeOfFlight;
+		this.distanceOfFlight = distanceOfFlight;
+		this.numberOfTransfers = numberOfTransfers;
+		this.locationOfTransfer = locationOfTransfer;
+		this.ticketPrice = ticketPrice;
+		this.discount = discount;
+		this.avrageRate = avrageRate;
+		this.destination = destination;
+		this.seats = seats;
+	}
 	
+	public Flight(String startingPoint, String endingPoint, Date dateOfTakeOff, Date dateOfLanding,
+			int timeOfFlight, int distanceOfFlight, int numberOfTransfers, String locationOfTransfer,
+			double ticketPrice, int discount, double avrageRate, Destination destination, List<Seat> seats) {
+		super();
+		this.startingPoint = startingPoint;
+		this.endingPoint = endingPoint;
+		this.dateOfTakeOff = dateOfTakeOff;
+		this.dateOfLanding = dateOfLanding;
+		this.timeOfFlight = timeOfFlight;
+		this.distanceOfFlight = distanceOfFlight;
+		this.numberOfTransfers = numberOfTransfers;
+		this.locationOfTransfer = locationOfTransfer;
+		this.ticketPrice = ticketPrice;
+		this.discount = discount;
+		this.avrageRate = avrageRate;
+		this.destination = destination;
+		this.seats = seats;
+	}
+	
+	public Flight() {}
 	
 }

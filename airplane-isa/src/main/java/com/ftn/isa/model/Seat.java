@@ -17,20 +17,32 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "friend")
+@Table(name = "seat")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Friend {
+public class Seat {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private long id;
 
-	@Column(name = "status")
-	private String status;
-
+	@Column(name = "name")
+	private String name;
+	
+	@Column(name = "discounted")
+	private boolean discounted;
+	
+	@Column(name = "available")
+	private boolean available;
+	
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_user")
+    @JoinColumn(name = "fk_flight")
+	private Flight flight;
+	
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_user")
 	private User user;
+
 }

@@ -18,6 +18,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 @Data
@@ -54,6 +56,9 @@ public class User {
 	@Column(name = "first_time_login")
 	private boolean firstTimeLogin;
 	
+	@Column(name = "passeport")
+	private String passeport;
+	
 	@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -63,9 +68,10 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Friend> friends = new ArrayList<Friend>();
 	
-	public User() {
-		super();
-	}
+	@OneToMany(mappedBy = "user")
+	private List<Seat> seats = new ArrayList<Seat>();
+	
+	public User() {}
 	
 	public User(String firstName, String lastName, String email, String password, Date dateOfBirth, String phoneNumber, boolean firstTimeLogin) {
 		this.firstName = firstName;
