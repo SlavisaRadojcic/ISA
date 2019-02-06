@@ -8,4 +8,7 @@ import com.ftn.isa.model.Hotel;
 @Repository
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
 
+	Hotel findByName(String name);
+	
+	Hotel findByNameAndAddress(String name, String address);
 }

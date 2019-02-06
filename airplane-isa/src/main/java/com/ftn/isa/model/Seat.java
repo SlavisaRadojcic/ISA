@@ -35,12 +35,12 @@ public class Seat {
 	@Column(name = "available")
 	private boolean available;
 	
-	@JsonBackReference
+	@JsonBackReference(value = "flight_reference")
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_flight")
 	private Flight flight;
 	
-	@JsonBackReference
+	@JsonBackReference(value = "user_reference")
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_user")
 	private User user;

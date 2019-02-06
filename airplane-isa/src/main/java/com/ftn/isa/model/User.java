@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,13 +19,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "user")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class User {
 
 	@Id
@@ -59,15 +63,21 @@ public class User {
 	@Column(name = "passeport")
 	private String passeport;
 	
+	@Column(name = "score")
+	private int score;
+	
+	@JsonBackReference(value = "roles_reference")
 	@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 	
+	@JsonBackReference(value = "friend_reference")
 	@OneToMany(mappedBy = "user")
 	private List<Friend> friends = new ArrayList<Friend>();
 	
+	@JsonBackReference(value = "seat_reference")
 	@OneToMany(mappedBy = "user")
 	private List<Seat> seats = new ArrayList<Seat>();
 	

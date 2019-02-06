@@ -1,8 +1,7 @@
 package com.ftn.isa.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.ftn.isa.model.User;
@@ -16,7 +15,8 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public User getUserById(long id) {
-		return userRepository.getOne(id);
+		return userRepository.findById(id)
+				.orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + id));
 	}
 
 	@Override

@@ -12,6 +12,8 @@ public interface SeatService {
 	
 	Seat save(Seat seat);
 	
+	List<Seat> saveList(List<Seat> seats);
+	
 	void delete(long id);
 	
 	Seat reserve(long id);

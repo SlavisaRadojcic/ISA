@@ -16,4 +16,5 @@ public interface FlightService {
 	void delete(long id);
 	
 	FlightResponse vote(long flightId, double rate);
+	
 }

@@ -8,4 +8,8 @@ import com.ftn.isa.model.RentACar;
 @Repository
 public interface RentACarRepository extends JpaRepository<RentACar, Long>{
 
+	RentACar findByName(String name);
+	
+	RentACar findByNameAndAddress(String name, String address);
+	
 }

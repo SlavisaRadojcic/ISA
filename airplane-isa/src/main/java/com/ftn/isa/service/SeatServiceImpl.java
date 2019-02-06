@@ -36,6 +36,15 @@ public class SeatServiceImpl implements SeatService {
 	public Seat save(Seat seat) {
 		return seatRepository.save(seat);
 	}
+	
+	@Override
+	public List<Seat> saveList(List<Seat> seats) {
+		for(Seat seat: seats) {
+			seat = save(seat);
+		}
+		
+		return seats;
+	}
 
 	@Override
 	public void delete(long id) {
@@ -62,6 +71,5 @@ public class SeatServiceImpl implements SeatService {
 		
 		return seatRepository.save(seat);
 	}
-	
 
 }

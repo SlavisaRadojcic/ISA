@@ -30,6 +30,11 @@ public class SeatController {
 		return seatService.save(seat);
 	}
 	
+	@PostMapping("/list")
+	public List<Seat> save(@RequestBody List<Seat> seats) {
+		return seatService.saveList(seats);
+	}
+	
 	@PostMapping("/reserve/{id}")
 	public Seat reserve(@PathVariable long id) {
 		return seatService.reserve(id);

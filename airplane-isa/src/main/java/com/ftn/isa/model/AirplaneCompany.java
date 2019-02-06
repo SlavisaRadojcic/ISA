@@ -32,6 +32,12 @@ public class AirplaneCompany {
 	@Column(name = "promo_description")
 	private String promoDescription;
 	
+	@Column(name = "luggage_type")
+	private String luggageType;
+	
+	@Column(name = "luggage_price")
+	private int luggagePrice;
+	
 	@Column(name = "avrage_rate")
 	private double avrageRate;
 	

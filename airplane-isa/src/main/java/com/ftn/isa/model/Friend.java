@@ -28,7 +28,7 @@ public class Friend {
 
 	@Column(name = "status")
 	private String status;
-
+	
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_user")

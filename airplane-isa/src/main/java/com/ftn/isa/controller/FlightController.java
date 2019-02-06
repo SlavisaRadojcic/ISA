@@ -29,6 +29,11 @@ public class FlightController {
 		return flightService.getAll();
 	}
 	
+	@GetMapping("/{id}")
+	public FlightResponse getFlightById(@PathVariable long id) {
+		return flightService.getById(id);
+	}
+	
 	@PostMapping
 	@PreAuthorize("hasRole('ADMIN')")
 	public FlightResponse saveFlight(@RequestBody FlightRequest flightRequest) {
