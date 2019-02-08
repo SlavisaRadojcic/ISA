@@ -11,4 +11,8 @@ import com.ftn.isa.model.Seat;
 public interface SeatRepository extends JpaRepository<Seat, Long>{
 
 	List<Seat> findByFlightId(long id);
+	
+	List<Seat> findByDiscounted(boolean discounted);
+	
+	List<Seat> findByUserId(long id);
 }

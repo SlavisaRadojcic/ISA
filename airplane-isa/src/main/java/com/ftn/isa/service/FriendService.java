@@ -3,14 +3,15 @@ package com.ftn.isa.service;
 import java.util.List;
 
 import com.ftn.isa.model.Friend;
+import com.ftn.isa.payload.FriendDTO;
 
 public interface FriendService {
 
-	List<Friend> getAllByUserId(long id);
+	List<FriendDTO> getAllByUserId(long id);
 	
-	Friend save(Friend friend);
+	FriendDTO save(FriendDTO friend);
 	
 	void delete(long id);
 	
-	Friend changeStatus(long id, String status);
+	FriendDTO changeStatus(long id, String status);
 }

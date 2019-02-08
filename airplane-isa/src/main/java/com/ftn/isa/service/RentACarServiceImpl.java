@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ftn.isa.model.Hotel;
 import com.ftn.isa.model.RentACar;
 import com.ftn.isa.repository.RentACarRepository;
 

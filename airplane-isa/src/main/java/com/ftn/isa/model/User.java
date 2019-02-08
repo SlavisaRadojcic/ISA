@@ -77,10 +77,6 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Friend> friends = new ArrayList<Friend>();
 	
-	@JsonBackReference(value = "seat_reference")
-	@OneToMany(mappedBy = "user")
-	private List<Seat> seats = new ArrayList<Seat>();
-	
 	public User() {}
 	
 	public User(String firstName, String lastName, String email, String password, Date dateOfBirth, String phoneNumber, boolean firstTimeLogin) {

@@ -1,10 +1,13 @@
 package com.ftn.isa.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.ftn.isa.model.User;
+import com.ftn.isa.payload.FriendDTO;
+import com.ftn.isa.payload.UserDTO;
 import com.ftn.isa.repository.UserRepository;
 
 @Service
@@ -13,23 +16,27 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
 	
+	@Autowired
+	FriendService friendService;
+	
 	@Override
-	public User getUserById(long id) {
-		return userRepository.findById(id)
-				.orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + id));
+	public UserDTO getUserById(long id) {
+		User user = userRepository.getOne(id);
+		List<FriendDTO> friendsDTO = friendService.getAllByUserId(id);
+		
+		UserDTO userDTO = new UserDTO().convertToDTO(user, friendsDTO);
+		
+		return userDTO;
 	}
 
 	@Override
-	public User save(User user) {
-//		User newUser = userRepository.getOne(user.getId());
-//		
-//		newUser.setEmail(user.getEmail());
-//		newUser.setUsername(user.getUsername());
-//		newUser.setName(user.getName());
-//		
-//		return userRepository.save(user);
+	public UserDTO save(UserDTO userDTO) {
+		User user = new UserDTO().convertToModel(userDTO);
 		
-		return null;
+		userRepository.save(user);
+		UserDTO newUserDTO = new UserDTO().convertToDTO(user);
+		
+		return newUserDTO;
 	}
 
 }

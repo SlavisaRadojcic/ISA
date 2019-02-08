@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftn.isa.payload.FlightRequest;
-import com.ftn.isa.payload.FlightResponse;
+import com.ftn.isa.payload.FlightDTO;
 import com.ftn.isa.service.FlightService;
 
 @RestController
@@ -25,18 +24,18 @@ public class FlightController {
 	FlightService flightService;
 	
 	@GetMapping
-	public List<FlightResponse> getAllAirplaneCompanies() {
+	public List<FlightDTO> getAllAirplaneCompanies() {
 		return flightService.getAll();
 	}
 	
 	@GetMapping("/{id}")
-	public FlightResponse getFlightById(@PathVariable long id) {
+	public FlightDTO getFlightById(@PathVariable long id) {
 		return flightService.getById(id);
 	}
 	
 	@PostMapping
 	@PreAuthorize("hasRole('ADMIN')")
-	public FlightResponse saveFlight(@RequestBody FlightRequest flightRequest) {
+	public FlightDTO saveFlight(@RequestBody FlightDTO flightRequest) {
 		return flightService.save(flightRequest);
 	}
 	
@@ -48,13 +47,19 @@ public class FlightController {
 	
 	@PutMapping
 	@PreAuthorize("hasRole('ADMIN')")
-	public FlightResponse editAirplaneCompany(@RequestBody FlightRequest flightRequest) {
+	public FlightDTO editAirplaneCompany(@RequestBody FlightDTO flightRequest) {
 		return flightService.save(flightRequest);
 	}
 	
 	@PostMapping("/vote/{flightId}/{rate}")
 	@PreAuthorize("hasRole('USER')")
-	public FlightResponse vote(@PathVariable long flightId, @PathVariable double rate) {
+	public FlightDTO vote(@PathVariable long flightId, @PathVariable double rate) {
 		return flightService.vote(flightId, rate);
+	}
+	
+	@GetMapping("/destination/{id}")
+	@PreAuthorize("hasRole('USER')")
+	public List<FlightDTO> getFlightByDestinationId(@PathVariable long id) {
+		return flightService.getByDestinationId(id);
 	}
 }

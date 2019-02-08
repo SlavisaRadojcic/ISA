@@ -2,21 +2,25 @@ package com.ftn.isa.service;
 
 import java.util.List;
 
-import com.ftn.isa.model.Seat;
+import com.ftn.isa.payload.SeatDTO;
 
 public interface SeatService {
 
-	List<Seat> getAllByFlightId(long id);
+	List<SeatDTO> getAllByFlightId(long id);
 	
-	List<Seat> getAllOnDiscount(long id);
+	List<SeatDTO> getAllOnDiscount(long id);
 	
-	Seat save(Seat seat);
+	SeatDTO getById(long id);
 	
-	List<Seat> saveList(List<Seat> seats);
+	SeatDTO save(SeatDTO seat);
+	
+	List<SeatDTO> saveList(List<SeatDTO> seats);
 	
 	void delete(long id);
 	
-	Seat reserve(long id);
+	SeatDTO reserve(long id);
 	
-	Seat cancelReservation(long id);
+	SeatDTO cancelReservation(long id);
+	
+	List<SeatDTO> getAllByUserid(long id);
 }

@@ -2,15 +2,17 @@ package com.ftn.isa.service;
 
 import java.util.List;
 
-import com.ftn.isa.model.Destination;
+import com.ftn.isa.payload.DestinationDTO;
 
 public interface DestinationService {
 
-	List<Destination> getAll();
+	List<DestinationDTO> getAll();
 	
-	Destination save(Destination destination);
+	DestinationDTO save(DestinationDTO destination);
 	
 	void delete(long id);
 	
-	List<Destination> getAllByComapnyId(long comapnyId);
+	List<DestinationDTO> getAllByComapnyId(long comapnyId);
+	
+	DestinationDTO getById(long id);
 }

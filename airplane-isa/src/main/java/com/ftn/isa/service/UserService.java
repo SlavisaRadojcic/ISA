@@ -1,10 +1,10 @@
 package com.ftn.isa.service;
 
-import com.ftn.isa.model.User;
+import com.ftn.isa.payload.UserDTO;
 
 public interface UserService {
 
-	User getUserById(long id);
+	UserDTO getUserById(long id);
 	
-	User save(User user);
+	UserDTO save(UserDTO user);
 }

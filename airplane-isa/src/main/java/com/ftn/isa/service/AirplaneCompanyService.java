@@ -2,17 +2,17 @@ package com.ftn.isa.service;
 
 import java.util.List;
 
-import com.ftn.isa.model.AirplaneCompany;
+import com.ftn.isa.payload.AirplaneCompanyDTO;
 
 public interface AirplaneCompanyService {
 
-	List<AirplaneCompany> getAll();
+	List<AirplaneCompanyDTO> getAll();
 	
-	AirplaneCompany save(AirplaneCompany airplaneCompany);
+	AirplaneCompanyDTO save(AirplaneCompanyDTO airplaneCompany);
 	
 	void delete(long id);
 	
-	AirplaneCompany getById(long id);
+	AirplaneCompanyDTO getById(long id);
 	
-	AirplaneCompany vote(long companyId, double rate);
+	AirplaneCompanyDTO vote(long companyId, double rate);
 }

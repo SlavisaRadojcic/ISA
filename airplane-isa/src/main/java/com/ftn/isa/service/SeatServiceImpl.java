@@ -1,5 +1,6 @@
 package com.ftn.isa.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.ftn.isa.model.Seat;
 import com.ftn.isa.model.User;
+import com.ftn.isa.payload.FlightDTO;
+import com.ftn.isa.payload.SeatDTO;
 import com.ftn.isa.repository.SeatRepository;
 import com.ftn.isa.repository.UserRepository;
 import com.ftn.isa.security.UserPrincipal;
@@ -20,30 +23,48 @@ public class SeatServiceImpl implements SeatService {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	FlightService flightService;
 
 	@Override
-	public List<Seat> getAllByFlightId(long id) {
-		return seatRepository.findByFlightId(id);
+	public List<SeatDTO> getAllByFlightId(long id) {
+		List<Seat> seats = seatRepository.findByFlightId(id);
+		List<SeatDTO> seatsDTO = new ArrayList<>();
+		
+		for(Seat seat: seats) {
+			seatsDTO.add(new SeatDTO().convertToDTO(seat));
+		}
+		
+		return seatsDTO;
 	}
 
 	@Override
-	public List<Seat> getAllOnDiscount(long id) {
+	public List<SeatDTO> getAllOnDiscount(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Seat save(Seat seat) {
-		return seatRepository.save(seat);
+	public SeatDTO save(SeatDTO seatDTO) {
+		FlightDTO flightDTO = flightService.getById(seatDTO.getFlightId());
+		seatDTO.setFlight(flightDTO);
+		Seat seat = new SeatDTO().convertToModel(seatDTO);
+		
+		seatRepository.save(seat);
+		
+		SeatDTO newSeatDTO = new SeatDTO().convertToDTO(seat);
+		
+		return newSeatDTO;
 	}
 	
 	@Override
-	public List<Seat> saveList(List<Seat> seats) {
-		for(Seat seat: seats) {
-			seat = save(seat);
+	public List<SeatDTO> saveList(List<SeatDTO> seatsDTO) {
+		for(SeatDTO seatDTO: seatsDTO) {
+			seatDTO = save(seatDTO);
 		}
 		
-		return seats;
+		return seatsDTO;
 	}
 
 	@Override
@@ -52,7 +73,7 @@ public class SeatServiceImpl implements SeatService {
 	}
 
 	@Override
-	public Seat reserve(long id) {
+	public SeatDTO reserve(long id) {
 		UserPrincipal userPrincipal = (UserPrincipal)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user = userRepository.findByEmail(userPrincipal.getEmail());
 		
@@ -60,16 +81,45 @@ public class SeatServiceImpl implements SeatService {
 		seat.setAvailable(false);
 		seat.setUser(user);
 		
-		return seatRepository.save(seat);
+		seatRepository.save(seat);
+		
+		SeatDTO seatDTO = new SeatDTO().convertToDTO(seat);
+		
+		return seatDTO;
 	}
 
 	@Override
-	public Seat cancelReservation(long id) {
+	public SeatDTO cancelReservation(long id) {
 		Seat seat = seatRepository.getOne(id);
 		seat.setAvailable(true);
 		seat.setUser(null);
 		
-		return seatRepository.save(seat);
+		seatRepository.save(seat);
+		
+		SeatDTO seatDTO = new SeatDTO().convertToDTO(seat);
+		
+		return seatDTO;
+	}
+
+	@Override
+	public SeatDTO getById(long id) {
+		Seat seat = seatRepository.getOne(id);
+		
+		SeatDTO seatDTO = new SeatDTO().convertToDTO(seat);
+		
+		return seatDTO;
+	}
+
+	@Override
+	public List<SeatDTO> getAllByUserid(long id) {
+		List<Seat> seats = seatRepository.findByUserId(id);
+		List<SeatDTO> seatsDTO = new ArrayList<>();
+		
+		for(Seat seat: seats) {
+			seatsDTO.add(new SeatDTO().convertToDTO(seat));
+		}
+		
+		return seatsDTO;
 	}
 
 }

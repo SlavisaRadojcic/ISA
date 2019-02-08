@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.isa.model.Flight;
-import com.ftn.isa.payload.FlightRequest;
-import com.ftn.isa.payload.FlightResponse;
+import com.ftn.isa.payload.DestinationDTO;
+import com.ftn.isa.payload.FlightDTO;
 import com.ftn.isa.repository.FlightRepository;
 
 @Service
@@ -17,9 +17,12 @@ public class FlightServiceImpl implements FlightService {
 	@Autowired
 	FlightRepository flightRepository;
 	
+	@Autowired
+	DestinationService destinationService;
+	
 	@Override
-	public List<FlightResponse> getAll() {
-		List<FlightResponse> flightsResponse = new ArrayList<>();
+	public List<FlightDTO> getAll() {
+		List<FlightDTO> flightsDTO = new ArrayList<>();
 		List<Flight> flights = flightRepository.findAll();
 		
 		for(Flight flight: flights) {
@@ -29,19 +32,20 @@ public class FlightServiceImpl implements FlightService {
 				transfersList.add(transfer);
 			}
 			
-			FlightResponse flightResponse = new FlightResponse(flight.getId(), flight.getStartingPoint(), flight.getEndingPoint(), flight.getDateOfTakeOff(), flight.getDateOfLanding(), flight.getTimeOfFlight(),
-					flight.getDistanceOfFlight(), flight.getNumberOfTransfers(), transfersList, flight.getTicketPrice(), flight.getDiscount(), flight.getAvrageRate(), flight.getDestination(), flight.getSeats());
+			FlightDTO flightDTO = new FlightDTO().convertToDTO(flight);
 			
-			flightsResponse.add(flightResponse);
+			flightsDTO.add(flightDTO);
 			
 		}
 		
-		return flightsResponse;
+		return flightsDTO;
 	}
 
 	@Override
-	public FlightResponse save(FlightRequest flightRequest) {
-		Flight flight = new FlightRequest().convertToFlight(flightRequest);
+	public FlightDTO save(FlightDTO flightDTO) {
+		DestinationDTO destinationDTO = destinationService.getById(flightDTO.getDestinationId());
+		flightDTO.setDestination(destinationDTO);
+		Flight flight = new FlightDTO().convertToModel(flightDTO);
 		
 		Flight newFlight = flightRepository.save(flight);
 		
@@ -51,15 +55,13 @@ public class FlightServiceImpl implements FlightService {
 			transfersList.add(transfer);
 		}
 		
-		FlightResponse flightResponse = new FlightResponse(newFlight.getId(), newFlight.getStartingPoint(), newFlight.getEndingPoint(), newFlight.getDateOfTakeOff(), newFlight.getDateOfLanding(),
-				newFlight.getTimeOfFlight(), newFlight.getDistanceOfFlight(), newFlight.getNumberOfTransfers(), transfersList, newFlight.getTicketPrice(), newFlight.getDiscount(),
-				newFlight.getAvrageRate(), newFlight.getDestination(), newFlight.getSeats());
+		FlightDTO newFlightDTO = new FlightDTO().convertToDTO(newFlight);
 		
-		return flightResponse;
+		return newFlightDTO;
 	}
 
 	@Override
-	public FlightResponse getById(long id) {
+	public FlightDTO getById(long id) {
 		Flight flight = flightRepository.getOne(id);
 		
 		String[] transfers = flight.getLocationOfTransfer().split(",");
@@ -68,10 +70,9 @@ public class FlightServiceImpl implements FlightService {
 			transfersList.add(transfer);
 		}
 		
-		FlightResponse flightResponse = new FlightResponse(flight.getId(), flight.getStartingPoint(), flight.getEndingPoint(), flight.getDateOfTakeOff(), flight.getDateOfLanding(), flight.getTimeOfFlight(),
-				flight.getDistanceOfFlight(), flight.getNumberOfTransfers(), transfersList, flight.getTicketPrice(), flight.getDiscount(), flight.getAvrageRate(), flight.getDestination(), flight.getSeats());
+		FlightDTO newFlightDTO = new FlightDTO().convertToDTO(flight);
 		
-		return flightResponse;
+		return newFlightDTO;
 	}
 
 	@Override
@@ -80,7 +81,7 @@ public class FlightServiceImpl implements FlightService {
 	}
 
 	@Override
-	public FlightResponse vote(long flightId, double rate) {
+	public FlightDTO vote(long flightId, double rate) {
 		Flight flight = flightRepository.getOne(flightId);
 		
 		if(flight.getAvrageRate() == 0) {
@@ -97,10 +98,29 @@ public class FlightServiceImpl implements FlightService {
 			transfersList.add(transfer);
 		}
 		
-		FlightResponse flightResponse = new FlightResponse(flight.getId(), flight.getStartingPoint(), flight.getEndingPoint(), flight.getDateOfTakeOff(), flight.getDateOfLanding(), flight.getTimeOfFlight(),
-				flight.getDistanceOfFlight(), flight.getNumberOfTransfers(), transfersList, flight.getTicketPrice(), flight.getDiscount(), flight.getAvrageRate(), flight.getDestination(), flight.getSeats());
+		FlightDTO newFlightDTO = new FlightDTO().convertToDTO(flight);
 		
-		return flightResponse;
+		return newFlightDTO;
+	}
+
+	@Override
+	public List<FlightDTO> getByDestinationId(long id) {
+		List<FlightDTO> flightsDTO = new ArrayList<>();
+		List<Flight> flights = flightRepository.findByDestinationId(id);
+		for(Flight flight: flights) {
+			String[] transfers = flight.getLocationOfTransfer().split(",");
+			List<String> transfersList = new ArrayList<>();
+			for(String transfer: transfers) {
+				transfersList.add(transfer);
+			}
+			
+			FlightDTO flightDTO = new FlightDTO().convertToDTO(flight);
+			
+			flightsDTO.add(flightDTO);
+			
+		}
+		
+		return flightsDTO;
 	}
 
 	

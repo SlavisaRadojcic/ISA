@@ -11,11 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "airplane_company")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class AirplaneCompany {
 
 	@Id
@@ -41,6 +45,7 @@ public class AirplaneCompany {
 	@Column(name = "avrage_rate")
 	private double avrageRate;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "airplaneCompany")
 	private List<Destination> destinations = new ArrayList<Destination>();
 	

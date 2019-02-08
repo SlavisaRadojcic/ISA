@@ -3,6 +3,7 @@ package com.ftn.isa.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftn.isa.model.Seat;
+import com.ftn.isa.payload.SeatDTO;
 import com.ftn.isa.service.SeatService;
 
 @RestController
@@ -20,28 +21,39 @@ public class SeatController {
 	@Autowired
 	SeatService seatService;
 	
-	@GetMapping("/{flightId}")
-	public List<Seat> getAllByFlightId(@PathVariable long flightId) {
+	@GetMapping("/flight/{flightId}")
+	@PreAuthorize("hasRole('USER')")
+	public List<SeatDTO> getAllByFlightId(@PathVariable long flightId) {
 		return seatService.getAllByFlightId(flightId);
 	}
 	
+	@GetMapping("/{id}")
+	@PreAuthorize("hasRole('USER')")
+	public SeatDTO getAllById(@PathVariable long id) {
+		return seatService.getById(id);
+	}
+	
 	@PostMapping
-	public Seat save(@RequestBody Seat seat) {
+	@PreAuthorize("hasRole('ADMIN')")
+	public SeatDTO save(@RequestBody SeatDTO seat) {
 		return seatService.save(seat);
 	}
 	
 	@PostMapping("/list")
-	public List<Seat> save(@RequestBody List<Seat> seats) {
+	@PreAuthorize("hasRole('ADMIN')")
+	public List<SeatDTO> save(@RequestBody List<SeatDTO> seats) {
 		return seatService.saveList(seats);
 	}
 	
 	@PostMapping("/reserve/{id}")
-	public Seat reserve(@PathVariable long id) {
+	@PreAuthorize("hasRole('USER')")
+	public SeatDTO reserve(@PathVariable long id) {
 		return seatService.reserve(id);
 	}
 	
 	@PostMapping("/cancel/{id}")
-	public Seat cancel(@PathVariable long id) {
+	@PreAuthorize("hasRole('USER')")
+	public SeatDTO cancel(@PathVariable long id) {
 		return seatService.cancelReservation(id);
 	}
 }
