@@ -40,15 +40,13 @@ public class UserController {
 	@PostMapping
 	@PreAuthorize("hasRole('USER')")
 	public FriendDTO addNewFrind(@RequestBody FriendDTO friend) {
-//		return friendService.save(friend);
-		return null;
+		return friendService.save(friend);
 	}
 	
 	@PostMapping("/{id}/{status}")
 	@PreAuthorize("hasRole('USER')")
 	public FriendDTO acceptFrind(@PathVariable long id, @PathVariable String status) {
-//		return friendService.changeStatus(id, status);
-		return null;
+		return friendService.changeStatus(id, status);
 	}
 	
 	@PutMapping
