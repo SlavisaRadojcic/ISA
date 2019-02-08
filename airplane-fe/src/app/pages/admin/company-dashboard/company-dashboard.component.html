@@ -1,0 +1,20 @@
+<div class="company-info">
+
+    <nav mat-tab-nav-bar>
+        <a mat-tab-link routerLink="company-profile" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">
+            <mat-icon class="icon">account_box</mat-icon>
+            Profile
+        </a>
+        <a mat-tab-link routerLink="config-flights" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
+            <mat-icon class="icon">settings</mat-icon>
+            Config flights
+        </a>
+        <a mat-tab-link routerLink="reports" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">
+            <mat-icon class="icon">assignment</mat-icon>
+            Reports
+        </a>
+    </nav>
+
+    <router-outlet></router-outlet>
+
+</div>

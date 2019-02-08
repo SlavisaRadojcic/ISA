@@ -1,63 +1,80 @@
 package com.ftn.isa.payload;
 
+import com.ftn.isa.model.Flight;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import com.ftn.isa.model.Flight;
-import com.ftn.isa.model.Seat;
-
 public class FlightDTO {
 
-	private long id;
+	private Long id;
+	private Long destinationId;
+	private String destinationName;
 	private String startingPoint;
 	private String endingPoint;
 	private Date dateOfTakeOff;
 	private Date dateOfLanding;
-	private int timeOfFlight;
-	private int distanceOfFlight;
-	private int numberOfTransfers;
-	private String locationOfTransfer;
-	private double ticketPrice;
-	private int discount;
-	private double avrageRate;
+	private Integer timeOfFlight;
+	private Integer distanceOfFlight;
+	private Integer numberOfTransfers;
+	private List<String> locationOfTransfer;
+	private Double ticketPrice;
+	private Integer discount;
+	private Double avrageRate;
 	private String flightType;
 	private String flightClass;
-	private int destinationId;
-	private DestinationDTO destination;
-	private List<Seat> seats = new ArrayList<Seat>();
+	private List<SeatDTO> seats = new ArrayList<>();
 
 	public FlightDTO() {
 	}
 
-	public FlightDTO(long id, String startingPoint, String endingPoint, Date dateOfTakeOff, Date dateOfLanding,
-			int timeOfFlight, int distanceOfFlight, int numberOfTransfers, String locationOfTransfer,
-			double ticketPrice, int discount, double avrageRate, String flightType, String flightClass,
-			DestinationDTO destination, List<Seat> seats) {
-		this.id = id;
-		this.startingPoint = startingPoint;
-		this.endingPoint = endingPoint;
-		this.dateOfTakeOff = dateOfTakeOff;
-		this.dateOfLanding = dateOfLanding;
-		this.timeOfFlight = timeOfFlight;
-		this.distanceOfFlight = distanceOfFlight;
-		this.numberOfTransfers = numberOfTransfers;
-		this.locationOfTransfer = locationOfTransfer;
-		this.ticketPrice = ticketPrice;
-		this.discount = discount;
-		this.avrageRate = avrageRate;
-		this.flightType = flightType;
-		this.flightClass = flightClass;
-		this.destination = destination;
-		this.seats = seats;
+	public FlightDTO(Flight flight) {
+		this.id = flight.getId();
+		this.startingPoint = flight.getStartingPoint();
+		this.endingPoint = flight.getEndingPoint();
+		this.dateOfTakeOff = flight.getDateOfTakeOff();
+		this.dateOfLanding = flight.getDateOfLanding();
+		this.timeOfFlight = flight.getTimeOfFlight();
+		this.distanceOfFlight = flight.getDistanceOfFlight();
+		this.numberOfTransfers = flight.getNumberOfTransfers();
+		this.locationOfTransfer = flight.getLocationOfTransfer() != null ? Arrays.asList(flight.getLocationOfTransfer().split(",")) : new ArrayList<>();
+		this.ticketPrice = flight.getTicketPrice();
+		this.discount = flight.getDiscount();
+		this.avrageRate = flight.getAvrageRate();
+		this.flightType = flight.getFlightType();
+		this.flightClass = flight.getFlightClass();
+		this.destinationId = flight.getDestination().getId();
+		this.destinationName = flight.getDestination().getName();
+
+		if (!flight.getSeats().isEmpty()) {
+			flight.getSeats().forEach(seat -> this.seats.add(new SeatDTO(seat)));
+		}
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getDestinationId() {
+		return destinationId;
+	}
+
+	public void setDestinationId(Long destinationId) {
+		this.destinationId = destinationId;
+	}
+
+	public String getDestinationName() {
+		return destinationName;
+	}
+
+	public void setDestinationName(String destinationName) {
+		this.destinationName = destinationName;
 	}
 
 	public String getStartingPoint() {
@@ -92,59 +109,59 @@ public class FlightDTO {
 		this.dateOfLanding = dateOfLanding;
 	}
 
-	public int getTimeOfFlight() {
+	public Integer getTimeOfFlight() {
 		return timeOfFlight;
 	}
 
-	public void setTimeOfFlight(int timeOfFlight) {
+	public void setTimeOfFlight(Integer timeOfFlight) {
 		this.timeOfFlight = timeOfFlight;
 	}
 
-	public int getDistanceOfFlight() {
+	public Integer getDistanceOfFlight() {
 		return distanceOfFlight;
 	}
 
-	public void setDistanceOfFlight(int distanceOfFlight) {
+	public void setDistanceOfFlight(Integer distanceOfFlight) {
 		this.distanceOfFlight = distanceOfFlight;
 	}
 
-	public int getNumberOfTransfers() {
+	public Integer getNumberOfTransfers() {
 		return numberOfTransfers;
 	}
 
-	public void setNumberOfTransfers(int numberOfTransfers) {
+	public void setNumberOfTransfers(Integer numberOfTransfers) {
 		this.numberOfTransfers = numberOfTransfers;
 	}
 
-	public String getLocationOfTransfer() {
+	public List<String> getLocationOfTransfer() {
 		return locationOfTransfer;
 	}
 
-	public void setLocationOfTransfer(String locationOfTransfer) {
+	public void setLocationOfTransfer(List<String> locationOfTransfer) {
 		this.locationOfTransfer = locationOfTransfer;
 	}
 
-	public double getTicketPrice() {
+	public Double getTicketPrice() {
 		return ticketPrice;
 	}
 
-	public void setTicketPrice(double ticketPrice) {
+	public void setTicketPrice(Double ticketPrice) {
 		this.ticketPrice = ticketPrice;
 	}
 
-	public int getDiscount() {
+	public Integer getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(int discount) {
+	public void setDiscount(Integer discount) {
 		this.discount = discount;
 	}
 
-	public double getAvrageRate() {
+	public Double getAvrageRate() {
 		return avrageRate;
 	}
 
-	public void setAvrageRate(double avrageRate) {
+	public void setAvrageRate(Double avrageRate) {
 		this.avrageRate = avrageRate;
 	}
 
@@ -164,65 +181,11 @@ public class FlightDTO {
 		this.flightClass = flightClass;
 	}
 
-	public int getDestinationId() {
-		return destinationId;
-	}
-
-	public void setDestinationId(int destinationId) {
-		this.destinationId = destinationId;
-	}
-
-	public DestinationDTO getDestination() {
-		return destination;
-	}
-
-	public void setDestination(DestinationDTO destination) {
-		this.destination = destination;
-	}
-
-	public List<Seat> getSeats() {
+	public List<SeatDTO> getSeats() {
 		return seats;
 	}
 
-	public void setSeats(List<Seat> seats) {
+	public void setSeats(List<SeatDTO> seats) {
 		this.seats = seats;
-	}
-
-	public Flight convertToModel(FlightDTO flightDTO) {
-		Flight flight = new Flight();
-
-		flight.setId(flightDTO.getId());
-		flight.setStartingPoint(flightDTO.getStartingPoint());
-		flight.setEndingPoint(flightDTO.getEndingPoint());
-		flight.setDateOfTakeOff(flightDTO.getDateOfTakeOff());
-		flight.setDateOfLanding(flightDTO.getDateOfLanding());
-		flight.setTimeOfFlight(flightDTO.getTimeOfFlight());
-		flight.setDistanceOfFlight(flightDTO.getDistanceOfFlight());
-		flight.setNumberOfTransfers(flightDTO.getNumberOfTransfers());
-		flight.setLocationOfTransfer(flightDTO.getLocationOfTransfer());
-		flight.setTicketPrice(flightDTO.getTicketPrice());
-		flight.setDiscount(flightDTO.getDiscount());
-		flight.setAvrageRate(flightDTO.getAvrageRate());
-		flight.setFlightType(flightDTO.getFlightType());
-		flight.setFlightClass(flightDTO.getFlightClass());
-		if (flightDTO.getDestination() != null) {
-			flight.setDestination(
-					new DestinationDTO().convertToModel(flightDTO.getDestination()));
-		}
-
-		return flight;
-	}
-
-	public FlightDTO convertToDTO(Flight flight) {
-		DestinationDTO destination = new DestinationDTO();
-		if (flight.getDestination() != null) {
-			destination = destination.convertToDTO(flight.getDestination());
-		}
-		
-		FlightDTO flightDTO = new FlightDTO(flight.getId(), flight.getStartingPoint(), flight.getEndingPoint(), flight.getDateOfTakeOff(), flight.getDateOfLanding(), flight.getTimeOfFlight(),
-				flight.getDistanceOfFlight(), flight.getNumberOfTransfers(), flight.getLocationOfTransfer(), flight.getTicketPrice(), flight.getDiscount(), flight.getAvrageRate(), flight.getFlightType(),
-				flight.getFlightClass(), destination, flight.getSeats());
-
-		return flightDTO;
 	}
 }

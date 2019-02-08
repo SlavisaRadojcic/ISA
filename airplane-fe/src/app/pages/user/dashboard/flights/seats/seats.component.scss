@@ -1,0 +1,119 @@
+$text-color: #363636;
+$available__background: #FFFFFF;
+$available__background-hover: #f2f2f2;
+$taken__background: #CCCCCC;
+$selected__background: #576EA7;
+
+.seats-page {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    margin: 0 auto;
+
+    .banner {
+        display: flex;
+        align-items: center;
+
+        .form-title {
+            font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+            text-transform: uppercase;
+        }
+    }
+
+    .wizard-container {
+        .guide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+
+            .item {
+                margin: 0 12px;
+                width: 24px;
+                height: 24px;
+                border: 1px solid $taken__background;
+            }
+            .available {
+                background-color: $available__background;
+            }
+            .taken {
+                background-color: $taken__background;
+            }
+            .selected {
+                background-color: $selected__background;
+            }
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+
+            .radio {
+                display: flex;
+                flex-direction: column;
+
+                .radio-label {
+                    margin-bottom: 12px;
+                }
+
+                .mat-radio-button {
+                    margin-bottom: 12px;
+                }
+            }
+        }
+    }
+
+    .seats-row {
+        display: flex;
+
+        .row-number {
+            align-items: center;
+            margin-right: 12px;
+            display: flex;
+            justify-content: center;
+            width: 24px;
+        }
+        .seats-container {
+            display: flex;
+
+            .seat {
+                width: 48px;
+                height: 48px;
+                margin: 1px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: $text-color;
+                border: 1px solid $taken__background;
+            }
+            .taken {
+                background-color: $taken__background;
+                color: #929292;
+                cursor: not-allowed;
+            }
+            .available {
+                background-color: $available__background;
+                cursor: pointer;
+            }
+            .available:hover {
+                background-color: $available__background-hover;
+            }
+            .selected {
+                background-color: $selected__background;
+                color: $available__background;
+                cursor: pointer;
+            }
+            .spaced {
+                margin-right: 24px;
+            }
+        }
+    }
+
+    .button-container {
+        display: flex;
+        margin-top: 24px;
+        justify-content: flex-end;
+    }
+}

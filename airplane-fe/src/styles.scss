@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "app/pages/login/login.component";
+@import "app/pages/register/register.component";
+@import "app/pages/admin/company-profile/company-profile.component";
+@import "app/pages/user/user-profile/user-profile.component";
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.add-flight-dialog {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+
+    .mat-dialog-container {
+        padding: 0;
+        overflow: hidden;
+    }
+}
+
+.add-seat-dialog,
+.add-destination-dialog {
+    display: flex;
+    flex-direction: column;
+
+    .mat-dialog-container {
+        padding: 0;
+        overflow: hidden;
+    }
+}

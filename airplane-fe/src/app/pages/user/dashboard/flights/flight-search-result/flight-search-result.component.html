@@ -1,0 +1,127 @@
+<div class="search-results">
+
+    <div class="filter-container">
+        <div class="item stops">
+            <mat-label class="label">Stops:</mat-label>
+            <div class="items">
+                <mat-checkbox>Direct</mat-checkbox>
+                <mat-checkbox>1</mat-checkbox>
+                <mat-checkbox>2+</mat-checkbox>
+            </div>
+        </div>
+
+        <div class="item duration">
+            <div class="text">Duration:</div>
+            <mat-slider thumbLabel tickInterval="1" min="0" max="100"></mat-slider>
+        </div>
+
+        <div class="item price">
+            <div class="text">Price:</div>
+            <mat-slider thumbLabel tickInterval="1" min="0" max="100"></mat-slider>
+        </div>
+
+        <div class="item cabin">
+            <mat-label class="label">Cabin:</mat-label>
+            <div class="items">
+                <mat-checkbox>Economy</mat-checkbox>
+                <mat-checkbox>Business</mat-checkbox>
+                <mat-checkbox>Mixed</mat-checkbox>
+            </div>
+        </div>
+
+        <button mat-button class="filter">Filter</button>
+    </div>
+
+    <div class="mat-elevation-z8 table">
+
+        <div class="table-header">
+            <div class="item-container">
+                <div class="label">
+                    <div class="text">Carry-On Bag</div>
+                    <div matPrefix class="prefix">
+                        <mat-icon>work</mat-icon>
+                    </div>
+                </div>
+                <mat-form-field appearance="legacy">
+                    <input type="number" matInput min="0"/>
+                </mat-form-field>
+            </div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div class="item-container">
+                <div class="label">
+                    <div class="text">Checked Bag</div>
+                    <div matPrefix class="prefix">
+                        <mat-icon>card_travel</mat-icon>
+                    </div>
+                </div>
+                <mat-form-field appearance="legacy">
+                    <input type="number" matInput min="0"/>
+                </mat-form-field>
+            </div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div class="item-container">
+                <mat-form-field appearance="outline" class="sort">
+                    <mat-label>Sort by</mat-label>
+                    <mat-select>
+                        <mat-option value="1">Best</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="table-content">
+            <mat-divider></mat-divider>
+            <div *ngFor="let flight of datasource">
+                <div class="item-container">
+                    <div class="item-with-price">
+                        <div class="item">
+                            <div class="icon">
+                                <mat-icon>flight_takeoff</mat-icon>
+                            </div>
+
+                            <div class="time-container">
+                                <div class="data">
+                                    <div class="time">{{ flight.dateOfTakeOff | date: 'shortTime' }}</div>
+                                    <div class="city">{{ flight.startingPoint }}</div>
+                                </div>
+                                <div class="dash">&ndash;</div>
+                                <div class="data">
+                                    <div class="time">{{ flight.dateOfLanding | date: 'shortTime' }}</div>
+                                    <div class="city">{{ flight.endingPoint }}</div>
+                                </div>
+                            </div>
+
+                            <div class="stops">
+                                {{ flight.numberOfTransfers }} stops
+                            </div>
+
+                            <div class="flight-time">
+                                {{ prettifyTime(flight.timeOfFlight) }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="price-container">
+                        <div class="price">
+                            <span class="amount">{{ flight.ticketPrice }}</span>
+                            <mat-icon>euro_symbol</mat-icon>
+                        </div>
+                        <div class="action">
+                            <button mat-button (click)="flightDetails(flight)">Select</button>
+                        </div>
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+            </div>
+
+        </div>
+
+        <div class="table-footer">
+
+        </div>
+
+    </div>
+
+</div>

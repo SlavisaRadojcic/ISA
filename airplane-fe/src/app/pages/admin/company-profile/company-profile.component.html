@@ -1,0 +1,140 @@
+<div class="company-profile">
+
+    <div class="basic-info">
+        <h3>Company profile</h3>
+
+        <form #profile="ngForm" name="profile" class="profile-form" (ngSubmit)="updateProfile()">
+            <mat-form-field appearance="outline" class="text">
+                <mat-label>Name</mat-label>
+                <input matInput name="name" type="text" [(ngModel)]="companyProfileDTO.name"/>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="text">
+                <mat-label>Address</mat-label>
+                <input matInput name="address" type="text" [(ngModel)]="companyProfileDTO.address"/>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="text">
+                <mat-label>Description</mat-label>
+                <textarea matInput name="description" type="text"
+                          [(ngModel)]="companyProfileDTO.promoDescription"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="text">
+                <mat-label>Luggage info</mat-label>
+                <textarea matInput name="luggageInfo" type="text"
+                          [(ngModel)]="companyProfileDTO.luggageInfo"></textarea>
+            </mat-form-field>
+
+            <button mat-button class="submit" type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="flight-info">
+        <div class="title-container">
+            <div class="title">Destinations</div>
+            <button mat-icon-button (click)="addDestination()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let destination of companyProfileDTO.destinations">
+                <mat-expansion-panel-header class="header">
+                    <mat-panel-title>{{ destination.name }}</mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="table">
+                    <div class="header">
+                        <mat-label class="title">Flights</mat-label>
+                        <button class="add-flight" mat-icon-button (click)="addFlight(destination, null)">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                    <table mat-table [dataSource]="destination.flights">
+
+                        <ng-container matColumnDef="endingPoint">
+                            <th mat-header-cell *matHeaderCellDef>Ending point</th>
+                            <td mat-cell *matCellDef="let element">{{ element.endingPoint }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="takeOffTime">
+                            <th mat-header-cell *matHeaderCellDef>Take off</th>
+                            <td mat-cell *matCellDef="let element">{{ element.dateOfTakeOff | date: 'short' }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="dateOfLanding">
+                            <th mat-header-cell *matHeaderCellDef>Landing</th>
+                            <td mat-cell *matCellDef="let element">{{ element.dateOfLanding | date: 'short' }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="timeOfFlight">
+                            <th mat-header-cell *matHeaderCellDef>Time of travel</th>
+                            <td mat-cell *matCellDef="let element">{{ prettifyTime(element.timeOfFlight) }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="distance">
+                            <th mat-header-cell *matHeaderCellDef>Distance</th>
+                            <td mat-cell *matCellDef="let element">{{ element.distanceOfFlight }}km</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="numberOfTransfers">
+                            <th mat-header-cell *matHeaderCellDef>Number of connections</th>
+                            <td mat-cell *matCellDef="let element">{{ element.numberOfTransfers }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="locationOfTransfer">
+                            <th mat-header-cell *matHeaderCellDef>Through cities</th>
+                            <td mat-cell *matCellDef="let element">{{ element.locationOfTransfer }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="ticketPrice">
+                            <th mat-header-cell *matHeaderCellDef>Price</th>
+                            <td mat-cell *matCellDef="let element">{{ element.ticketPrice }}&euro;</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="avrageRate">
+                            <th mat-header-cell *matHeaderCellDef>User score</th>
+                            <td mat-cell *matCellDef="let element">{{ element.avrageRate }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="luggageInfo">
+                            <th mat-header-cell *matHeaderCellDef>Luggagge info</th>
+                            <td mat-cell *matCellDef="let element">{{ element.luggageInfo }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="tickets">
+                            <th mat-header-cell *matHeaderCellDef>Seats</th>
+                            <td mat-cell *matCellDef="let element">
+                                <button mat-icon-button (click)="addSeats(element)">
+                                    <mat-icon>airline_seat_recline_normal</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="actions">
+                            <th mat-header-cell *matHeaderCellDef class="action-header">Actions</th>
+                            <td mat-cell *matCellDef="let element" class="action-cell">
+                                <button mat-icon-button (click)="addFlight(destination, element.id)">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button mat-icon-button (click)="deleteFlight(element.id)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="flightsTableColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: flightsTableColumns;"></tr>
+                    </table>
+                </div>
+
+                <mat-action-row class="actions">
+                    <button mat-icon-button type="button" (click)="deleteDestination(destination)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+</div>

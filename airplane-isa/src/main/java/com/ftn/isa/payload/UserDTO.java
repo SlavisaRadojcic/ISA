@@ -8,7 +8,7 @@ import com.ftn.isa.model.User;
 
 public class UserDTO {
 
-	private long id;
+	private Long id;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -16,34 +16,34 @@ public class UserDTO {
 	private Date dateOfBirth;
 	private String phoneNumber;
 	private boolean firstTimeLogin;
-	private String passeport;
-	private int score;
-	private List<FriendDTO> friends = new ArrayList<FriendDTO>();
+	private String passport;
+	private Integer score;
+	private List<FriendDTO> friends = new ArrayList<>();
 
 	public UserDTO() {}
 
-	public UserDTO(long id, String firstName, String lastName, String email, String password, Date dateOfBirth,
-			String phoneNumber, boolean firstTimeLogin, String passeport, int score, List<FriendDTO> friends) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-		this.dateOfBirth = dateOfBirth;
-		this.phoneNumber = phoneNumber;
-		this.firstTimeLogin = firstTimeLogin;
-		this.passeport = passeport;
-		this.score = score;
-		if(friends != null) {
-			this.friends = friends;
+	public UserDTO(User user) {
+		this.id = user.getId();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.email = user.getEmail();
+		this.password = user.getPassword();
+		this.dateOfBirth = user.getDateOfBirth();
+		this.phoneNumber = user.getPhoneNumber();
+		this.firstTimeLogin = user.isFirstTimeLogin();
+		this.passport = user.getPasseport();
+		this.score = user.getScore();
+
+		if (!user.getFriends().isEmpty()) {
+			user.getFriends().forEach(friend -> this.friends.add(new FriendDTO(friend)));
 		}
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -103,19 +103,19 @@ public class UserDTO {
 		this.firstTimeLogin = firstTimeLogin;
 	}
 
-	public String getPasseport() {
-		return passeport;
+	public String getPassport() {
+		return passport;
 	}
 
-	public void setPasseport(String passeport) {
-		this.passeport = passeport;
+	public void setPassport(String passport) {
+		this.passport = passport;
 	}
 
-	public int getScore() {
+	public Integer getScore() {
 		return score;
 	}
 
-	public void setScore(int score) {
+	public void setScore(Integer score) {
 		this.score = score;
 	}
 
@@ -125,30 +125,5 @@ public class UserDTO {
 
 	public void setFriends(List<FriendDTO> friends) {
 		this.friends = friends;
-	}
-
-	public User convertToModel(UserDTO userDTO) {
-		User user = new User();
-
-		user.setId(userDTO.getId());
-		user.setFirstName(userDTO.getFirstName());
-		user.setLastName(userDTO.getLastName());
-		user.setEmail(userDTO.getEmail());
-		user.setDateOfBirth(userDTO.getDateOfBirth());
-		user.setFirstTimeLogin(userDTO.isFirstTimeLogin());
-		user.setPasseport(userDTO.getPasseport());
-		user.setScore(userDTO.getScore());
-		
-		return user;
-	}
-
-	public UserDTO convertToDTO(User user) {
-		return new UserDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(),
-				user.getDateOfBirth(), user.getPhoneNumber(), user.isFirstTimeLogin(), user.getPasseport(), user.getScore(), friends);
-	}
-	
-	public UserDTO convertToDTO(User user, List<FriendDTO> friends) {
-		return new UserDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(),
-				user.getDateOfBirth(), user.getPhoneNumber(), user.isFirstTimeLogin(), user.getPasseport(), user.getScore(), friends);
 	}
 }

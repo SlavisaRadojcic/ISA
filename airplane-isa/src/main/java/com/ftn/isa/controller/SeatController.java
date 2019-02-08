@@ -20,40 +20,46 @@ public class SeatController {
 
 	@Autowired
 	SeatService seatService;
-	
+
 	@GetMapping("/flight/{flightId}")
 	@PreAuthorize("hasRole('USER')")
 	public List<SeatDTO> getAllByFlightId(@PathVariable long flightId) {
 		return seatService.getAllByFlightId(flightId);
 	}
-	
+
 	@GetMapping("/{id}")
 	@PreAuthorize("hasRole('USER')")
 	public SeatDTO getAllById(@PathVariable long id) {
 		return seatService.getById(id);
 	}
-	
+
 	@PostMapping
 	@PreAuthorize("hasRole('ADMIN')")
 	public SeatDTO save(@RequestBody SeatDTO seat) {
 		return seatService.save(seat);
 	}
-	
+
 	@PostMapping("/list")
 	@PreAuthorize("hasRole('ADMIN')")
 	public List<SeatDTO> save(@RequestBody List<SeatDTO> seats) {
 		return seatService.saveList(seats);
 	}
-	
+
 	@PostMapping("/reserve/{id}")
 	@PreAuthorize("hasRole('USER')")
 	public SeatDTO reserve(@PathVariable long id) {
 		return seatService.reserve(id);
 	}
-	
+
 	@PostMapping("/cancel/{id}")
 	@PreAuthorize("hasRole('USER')")
 	public SeatDTO cancel(@PathVariable long id) {
 		return seatService.cancelReservation(id);
+	}
+
+	@PostMapping("/deleteSeats")
+	@PreAuthorize("hasRole('ADMIN')")
+	public void deleteSeats(@RequestBody List<SeatDTO> seats) {
+		seatService.deleteSeats(seats);
 	}
 }

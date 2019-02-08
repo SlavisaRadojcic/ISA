@@ -4,30 +4,42 @@ import com.ftn.isa.model.Seat;
 
 public class SeatDTO {
 
-	private long id;
+	private Long id;
+	private Long flightId;
 	private String name;
 	private boolean discounted;
 	private boolean available;
-	private int flightId;
-	private FlightDTO flight;
+	private UserDTO user;
 
 	public SeatDTO() {
 	}
 
-	public SeatDTO(long id, String name, boolean discounted, boolean available, FlightDTO flight) {
-		this.id = id;
-		this.name = name;
-		this.discounted = discounted;
-		this.available = available;
-		this.flight = flight;
+	public SeatDTO(Seat seat) {
+		this.id = seat.getId();
+		this.name = seat.getName();
+		this.flightId = seat.getFlight().getId();
+		this.discounted = seat.isDiscounted();
+		this.available = seat.isAvailable();
+
+		if (seat.getUser() != null) {
+			this.user = new UserDTO(seat.getUser());
+		}
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getFlightId() {
+		return flightId;
+	}
+
+	public void setFlightId(Long flightId) {
+		this.flightId = flightId;
 	}
 
 	public String getName() {
@@ -54,42 +66,11 @@ public class SeatDTO {
 		this.available = available;
 	}
 
-	public FlightDTO getFlight() {
-		return flight;
+	public UserDTO getUser() {
+		return user;
 	}
 
-	public void setFlight(FlightDTO flight) {
-		this.flight = flight;
-	}
-
-	public int getFlightId() {
-		return flightId;
-	}
-
-	public void setFlightId(int flightId) {
-		this.flightId = flightId;
-	}
-
-	public Seat convertToModel(SeatDTO seatDTO) {
-		Seat seat = new Seat();
-
-		seat.setId(seatDTO.getId());
-		seat.setName(seatDTO.getName());
-		seat.setDiscounted(seatDTO.isDiscounted());
-		seat.setAvailable(seatDTO.isAvailable());
-		if (seatDTO.getFlight() != null) {
-			seat.setFlight(new FlightDTO().convertToModel(seatDTO.getFlight()));
-		}
-
-		return seat;
-	}
-
-	public SeatDTO convertToDTO(Seat seat) {
-		FlightDTO flightDTO = new FlightDTO();
-		if (seat.getFlight() != null) {
-			flightDTO = flightDTO.convertToDTO(seat.getFlight());
-		}
-
-		return new SeatDTO(seat.getId(), seat.getName(), seat.isDiscounted(), seat.isAvailable(), flightDTO);
+	public void setUser(UserDTO user) {
+		this.user = user;
 	}
 }

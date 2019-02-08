@@ -1,40 +1,62 @@
 package com.ftn.isa.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.ftn.isa.model.AirplaneCompany;
+import com.ftn.isa.model.Destination;
+import com.ftn.isa.model.Flight;
+import com.ftn.isa.model.Seat;
+import com.ftn.isa.payload.DestinationDTO;
+import com.ftn.isa.payload.FlightDTO;
+import com.ftn.isa.repository.AirplaneCompanyRepository;
+import com.ftn.isa.repository.DestinationRepository;
+import com.ftn.isa.repository.FlightRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ftn.isa.model.AirplaneCompany;
-import com.ftn.isa.model.Destination;
-import com.ftn.isa.payload.AirplaneCompanyDTO;
-import com.ftn.isa.payload.DestinationDTO;
-import com.ftn.isa.repository.AirplaneCompanyRepository;
-import com.ftn.isa.repository.DestinationRepository;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DestinationServiceImpl implements DestinationService {
 
 	@Autowired
 	AirplaneCompanyRepository airplaneCompanyRepository;
-	
+
 	@Autowired
 	DestinationRepository destinationRepository;
-	
+
 	@Autowired
 	FlightService flightService;
-	
+
+	@Autowired
+	FlightRepository flightRepository;
+
 	@Override
-	public DestinationDTO save(DestinationDTO destinationDTO) {
-		AirplaneCompany company = airplaneCompanyRepository.getOne(destinationDTO.getCompanyId());
-		destinationDTO.setAirplaneCompanyDTO(new AirplaneCompanyDTO().convertToDTO(company));
-		Destination destination = new DestinationDTO().convertToModel(destinationDTO);
-		destination = destinationRepository.save(destination);
-		
-		DestinationDTO newDestination = new DestinationDTO().convertToDTO(destination);
-		
-		return newDestination;
+	public DestinationDTO save(DestinationDTO dto) {
+		AirplaneCompany company = airplaneCompanyRepository.getOne(dto.getCompanyId());
+
+		List<Flight> flights = new ArrayList<>();
+		dto.getFlights().forEach(flightDTO -> {
+			Flight flight = new Flight();
+			BeanUtils.copyProperties(flightDTO, flight, "seats");
+
+			List<Seat> seats = new ArrayList<>();
+			flightDTO.getSeats().forEach(seatDTO -> {
+				Seat seat = new Seat();
+				BeanUtils.copyProperties(seatDTO, seat, "user");
+
+				seats.add(seat);
+			});
+
+			flight.setSeats(seats);
+		});
+
+		Destination destination = new Destination();
+		BeanUtils.copyProperties(dto, destination, "id", "flights");
+		destination.setFlights(flights);
+		destination.setAirplaneCompany(company);
+
+		return new DestinationDTO(destinationRepository.save(destination));
 	}
 
 	@Override
@@ -44,34 +66,38 @@ public class DestinationServiceImpl implements DestinationService {
 
 	@Override
 	public List<DestinationDTO> getAllByComapnyId(long comapnyId) {
-		List<Destination> destinations = destinationRepository.findByAirplaneCompanyId(comapnyId); 
+		List<Destination> destinations = destinationRepository.findByAirplaneCompanyId(comapnyId);
+		return getDestinationDTOs(destinations);
+	}
+
+	private List<DestinationDTO> getDestinationDTOs(List<Destination> destinations) {
 		List<DestinationDTO> destinationsDTO = new ArrayList<>();
-		
+
 		for(Destination destination: destinations) {
-			destinationsDTO.add(new DestinationDTO().convertToDTO(destination, flightService.getByDestinationId(destination.getId())));
+			List<FlightDTO> flights = flightService.getByDestinationId(destination.getId());
+			DestinationDTO destinationDTO = new DestinationDTO(destination);
+			destinationDTO.setFlights(flights);
+
+			destinationsDTO.add(destinationDTO);
 		}
-		
+
 		return destinationsDTO;
 	}
 
 	@Override
 	public List<DestinationDTO> getAll() {
 		List<Destination> destinations = destinationRepository.findAll();
-		List<DestinationDTO> destinationsDTO = new ArrayList<>();
-		
-		for(Destination destination: destinations) {
-			destinationsDTO.add(new DestinationDTO().convertToDTO(destination, flightService.getByDestinationId(destination.getId())));
-		}
-		
-		return destinationsDTO;
+		return getDestinationDTOs(destinations);
 	}
 
 	@Override
 	public DestinationDTO getById(long id) {
 		Destination destination = destinationRepository.getOne(id);
-		DestinationDTO destinationDTO = new DestinationDTO().convertToDTO(destination, flightService.getByDestinationId(destination.getId()));
-		
-		return destinationDTO;
+		DestinationDTO dto = new DestinationDTO(destination);
+		List<FlightDTO> flights = flightService.getByDestinationId(destination.getId());
+		dto.setFlights(flights);
+
+		return dto;
 	}
 
 }

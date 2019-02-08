@@ -1,0 +1,96 @@
+<div class="dialog">
+    <div mat-dialog-title>
+        <div class="title">Add flight</div>
+        <div class="close">
+            <button mat-icon-button type="button">
+                <mat-icon (click)="close()">close</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-dialog-content class="dialog-content">
+        <form #addFlightForm="ngForm" (ngSubmit)="submit()" (keydown.enter)="$event.preventDefault()" novalidate>
+
+            <div class="top">
+                <mat-form-field appearance="outline">
+                    <mat-label>Starting point</mat-label>
+                    <input matInput name="destination" readonly type="text" [ngModel]="destinationDto.name"/>
+                </mat-form-field>
+            </div>
+
+            <div class="bottom">
+                <div class="side">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Ending point</mat-label>
+                        <input matInput name="endingPoint" type="text" [(ngModel)]="flight.endingPoint"/>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Take off</mat-label>
+                        <input matInput [matDatepicker]="dateOfTakeOffDatePicker" name="dateOfTakeOff" [(ngModel)]="flight.dateOfTakeOff">
+                        <mat-datepicker-toggle matSuffix [for]="dateOfTakeOffDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #dateOfTakeOffDatePicker></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="time">
+                        <mat-label>Take off time</mat-label>
+                        <input matInput name="takeOffTime" [ngxTimepicker]="takeOffTimepicker" [disableClick]="true" [format]="24" [(ngModel)]="takeOffTime" readonly>
+                        <ngx-material-timepicker-toggle [for]="takeOffTimepicker"></ngx-material-timepicker-toggle>
+                        <ngx-material-timepicker #takeOffTimepicker></ngx-material-timepicker>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Landing</mat-label>
+                        <input matInput [matDatepicker]="dateOfLandingDatePicker" name="dateOfTakeOff" [(ngModel)]="flight.dateOfLanding">
+                        <mat-datepicker-toggle matSuffix [for]="dateOfLandingDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #dateOfLandingDatePicker></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="time">
+                        <mat-label>Landing time</mat-label>
+                        <input matInput name="takeOffTime" [ngxTimepicker]="landingTimepicker" [disableClick]="true" [format]="24" [(ngModel)]="landingTime" readonly>
+                        <ngx-material-timepicker-toggle [for]="landingTimepicker"></ngx-material-timepicker-toggle>
+                        <ngx-material-timepicker #landingTimepicker></ngx-material-timepicker>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Time of flight</mat-label>
+                        <input matInput name="timeOfFlight" type="number" [(ngModel)]="flight.timeOfFlight"/>
+                    </mat-form-field>
+                </div>
+
+                <div class="side">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Distance</mat-label>
+                        <input matInput name="distance" type="number" [(ngModel)]="flight.distanceOfFlight"/>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Number of transfers</mat-label>
+                        <input matInput name="numberOfTransfers" type="number" [(ngModel)]="flight.numberOfTransfers"/>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Location of transfers</mat-label>
+                        <input matInput name="locationOfTransfer" type="text" [(ngModel)]="transfers"/>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Ticket price</mat-label>
+                        <input matInput name="ticketPrice" type="number" [(ngModel)]="flight.ticketPrice"/>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Discount</mat-label>
+                        <input matInput name="discount" type="number" [(ngModel)]="flight.discount"/>
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </form>
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="dialog-actions">
+        <button mat-button (click)="submit()">Submit</button>
+        <button mat-button (click)="close()">Close</button>
+    </mat-dialog-actions>
+</div>

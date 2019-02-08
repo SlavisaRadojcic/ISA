@@ -1,0 +1,33 @@
+.login-page {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .login-form {
+        display: flex;
+        flex-direction: column;
+        width: 15%;
+
+        .form-title {
+            font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .username {
+
+        }
+
+        .password {
+
+        }
+
+        .submit {
+
+        }
+
+        .register {
+            margin-top: 36px;
+        }
+    }
+}

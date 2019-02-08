@@ -19,7 +19,7 @@ import com.ftn.isa.service.AirplaneCompanyServiceImpl;
 @RestController
 @RequestMapping("/api/airplane-companies")
 public class AirplaneCompanyController {
-	
+
 	@Autowired
 	AirplaneCompanyServiceImpl airplaneCompanyService;
 
@@ -27,31 +27,31 @@ public class AirplaneCompanyController {
 	public List<AirplaneCompanyDTO> getAllAirplaneCompanies() {
 		return airplaneCompanyService.getAll();
 	}
-	
+
 	@GetMapping("/{id}")
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('ADMIN')")
 	public AirplaneCompanyDTO getCompanyById(@PathVariable long id) {
 		return airplaneCompanyService.getById(id);
 	}
-	
+
 	@PostMapping
 	@PreAuthorize("hasRole('ADMIN')")
 	public AirplaneCompanyDTO saveAirplaneCompany(@RequestBody AirplaneCompanyDTO airplaneCompany) {
 		return airplaneCompanyService.save(airplaneCompany);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public void deleteAirplaneCompany(@PathVariable long id) {
 		airplaneCompanyService.delete(id);
 	}
-	
+
 	@PutMapping
 	@PreAuthorize("hasRole('ADMIN')")
 	public AirplaneCompanyDTO editAirplaneCompany(@RequestBody AirplaneCompanyDTO airplaneCompany) {
 		return airplaneCompanyService.save(airplaneCompany);
 	}
-	
+
 	@PostMapping("/vote/{companyId}/{rate}")
 	@PreAuthorize("hasRole('USER')")
 	public AirplaneCompanyDTO saveAirplaneCompany(@PathVariable long companyId, @PathVariable double rate) {

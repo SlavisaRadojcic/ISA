@@ -1,0 +1,34 @@
+.flight-search-page {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+
+    .search-top {
+        .mat-form-field {
+            margin-right: 12px;
+        }
+
+    }
+
+    .search-bottom {
+        .mat-form-field {
+            margin-right: 12px;
+
+            .icon {
+
+            }
+        }
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: flex-end;
+
+        .mat-raised-button {
+            .mat-button-wrapper {
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+}

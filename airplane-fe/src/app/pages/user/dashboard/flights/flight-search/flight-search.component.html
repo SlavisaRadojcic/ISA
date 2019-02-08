@@ -1,0 +1,64 @@
+<div class="flight-search-page">
+
+    <div class="search-fields">
+        <div class="search-top">
+            <mat-form-field appearance="outline">
+                <mat-label>Flight type</mat-label>
+                <mat-select placeholder="Flight type" [(ngModel)]="searchDTO.flightType">
+                    <mat-option *ngFor="let type of flightTypes" [value]="type">{{ type }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Number of persons</mat-label>
+                <mat-select placeholder="Number of persons">
+                    <mat-option value="1">1</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Class</mat-label>
+                <mat-select placeholder="Class">
+                    <mat-option *ngFor="let flightClass of flightClasses" [value]="flightClass">{{ flightClass }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="search-bottom">
+            <mat-form-field appearance="outline">
+                <mat-label>From</mat-label>
+                <input matInput name="from" type="text" placeholder="From"/>
+                <mat-icon matSuffix class="icon">flight_takeoff</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>To</mat-label>
+                <input matInput name="to" type="text" placeholder="To"/>
+                <mat-icon matSuffix class="icon">flight_land</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="depart">
+                <mat-label>Depart</mat-label>
+                <input matInput [matDatepicker]="departDatepicker" name="depart" [(ngModel)]="searchDTO.depart">
+                <mat-datepicker-toggle matSuffix [for]="departDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #departDatepicker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="return">
+                <mat-label>Return</mat-label>
+                <input matInput [matDatepicker]="returnDatepicker" name="return" [(ngModel)]="searchDTO.arrival">
+                <mat-datepicker-toggle matSuffix [for]="returnDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #returnDatepicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="buttons">
+            <button mat-raised-button><mat-icon>search</mat-icon> Search</button>
+        </div>
+    </div>
+
+    <div class="search-results">
+        <app-search-results></app-search-results>
+    </div>
+
+</div>

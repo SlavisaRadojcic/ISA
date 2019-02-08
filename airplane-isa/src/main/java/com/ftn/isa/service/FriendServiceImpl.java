@@ -3,6 +3,7 @@ package com.ftn.isa.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,23 +16,27 @@ public class FriendServiceImpl implements FriendService {
 
 	@Autowired
 	FriendRepository friendRepository;
-	
+
 	@Override
 	public List<FriendDTO> getAllByUserId(long id) {
 		List<FriendDTO> friendsDTO = new ArrayList<>();
 		List<Friend> friends = friendRepository.getByUserId(id);
-		
+
 		for(Friend friend: friends) {
-			friendsDTO.add(new FriendDTO().convertToDTO(friend));
+			friendsDTO.add(new FriendDTO(friend));
 		}
-		
+
 		return friendsDTO;
 	}
 
 	@Override
-	public FriendDTO save(FriendDTO friend) {
-//		return friendRepository.save(friend);
-		return null;
+	public FriendDTO save(FriendDTO friendDTO) {
+		Friend friend = new Friend();
+		BeanUtils.copyProperties(friendDTO, friend);
+		
+		friendRepository.save(friend);
+
+		return new FriendDTO(friend);
 	}
 
 	@Override
@@ -43,9 +48,9 @@ public class FriendServiceImpl implements FriendService {
 	public FriendDTO changeStatus(long id, String status) {
 		Friend friend = friendRepository.getOne(id);
 		friend.setStatus(status);
+		friendRepository.save(friend);
 		
-//		return friendRepository.save(friend);
-		return null;
+		return new FriendDTO(friend);
 	}
-	
+
 }

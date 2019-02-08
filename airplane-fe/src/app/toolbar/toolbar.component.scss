@@ -1,0 +1,19 @@
+.toolbar-container {
+    display: flex;
+    justify-content: center;
+
+    .icon {
+        margin-right: 24px;
+    }
+
+    .app-name {
+        font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+        text-transform: uppercase;
+        font-size: 26px;
+    }
+
+    .logout {
+        position: absolute;
+        right: 12px;
+    }
+}

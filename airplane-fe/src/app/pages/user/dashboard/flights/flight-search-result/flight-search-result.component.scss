@@ -1,0 +1,131 @@
+.search-results {
+    margin-top: 24px;
+    display: flex;
+
+    .filter-container {
+        margin-right: 12px;
+
+        .item {
+            margin-bottom: 12px;
+
+            .label {
+                font-weight: bold;
+            }
+
+            .items {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .text {
+                font-weight: bold;
+            }
+        }
+
+        .filter {
+            width: 100%;
+            background-color: #576ea7;
+            color: #FFFFFF;
+        }
+    }
+
+    .table {
+        width: 100%;
+        height: 100%;
+
+        .table-header {
+            display: flex;
+            padding: 0 12px;
+            justify-content: space-around;
+
+            .item-container {
+                display: flex;
+                width: 200px;
+                align-items: center;
+
+                .label {
+                    width: 70%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-evenly;
+
+                    .text {
+                        height: 26px;
+                        padding-top: 2px;
+                    }
+
+                    .prefix {
+
+                    }
+                }
+
+                .mat-form-field {
+                    width: 60px;
+                    text-align: right;
+                }
+                .mat-form-field.sort {
+                    text-align: left;
+                    display: flex;
+                }
+            }
+        }
+
+        .table-content {
+            .item-container {
+                padding: 12px 0;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                .item-with-price {
+                    width: 85%;
+
+                    .item {
+                        display: flex;
+                        justify-content: space-evenly;
+
+                        .icon {
+
+                        }
+                        .time-container {
+                            display: flex;
+                            align-items: baseline;
+
+                            .data {
+                                .time {
+                                    font-size: 22px;
+                                }
+                                .city {
+                                    text-align: right;
+                                }
+                            }
+                            .dash {
+                                margin: 0 12px;
+                            }
+                        }
+                    }
+                }
+                .price-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 15%;
+                    margin-right: 12px;
+
+                    .price {
+                        display: flex;
+                        align-items: center;
+
+                        .amount {
+                            font-size: 22px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .table-footer {
+
+        }
+    }
+}

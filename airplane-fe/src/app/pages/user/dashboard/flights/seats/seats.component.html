@@ -1,0 +1,88 @@
+<div class="seats-page">
+    <div class="banner">
+        <h3 class="form-title">Flight details</h3>
+    </div>
+
+    <div class="wizard-container">
+        <mat-horizontal-stepper [linear]="true" #wizard>
+
+            <mat-step>
+                <ng-template matStepLabel>Choose seats</ng-template>
+
+                <div class="guide">
+                    <div class="item available"></div> Available
+                    <div class="item taken"></div> Taken
+                    <div class="item selected"></div> Selected
+                </div>
+                <div class="seats-row" *ngFor="let row of seatMatrix | keyvalue">
+                    <div class="row-number">{{ row.key }}</div>
+                    <div class="seats-container">
+                        <div class="seat" *ngFor="let seat of row.value; let i = index"
+                             (click)="selectSeat(seat)"
+                             [ngClass]="{'taken' : !seat.available,
+                                 'available': seat.available && !seat.selected,
+                                 'selected': seat.selected,
+                                 'spaced': (i+1)%3 === 0}">{{ seat.name }}</div>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <div class="stepper-button button">
+                        <button mat-button (click)="goBack()">Previous</button>
+                    </div>
+                    <div class="stepper-button button">
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </div>
+            </mat-step>
+
+            <mat-step>
+                <ng-template matStepLabel>Passenger info</ng-template>
+
+                <div class="info">
+                    <mat-form-field appearance="outline">
+                        <mat-label>First name</mat-label>
+                        <input matInput type="text" [(ngModel)]="user.firstName"/>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Last name</mat-label>
+                        <input matInput type="text" [(ngModel)]="user.lastName"/>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Birthday</mat-label>
+                        <input matInput [matDatepicker]="birthdayDatepicker" name="birthday" [(ngModel)]="user.birthday">
+                        <mat-datepicker-toggle matSuffix [for]="birthdayDatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #birthdayDatepicker></mat-datepicker>
+                    </mat-form-field>
+
+                    <!--<mat-form-field appearance="outline">-->
+                        <!--<mat-label>Contact</mat-label>-->
+                        <!--<input matInput type="text" [(ngModel)]="user.contact"/>-->
+                    <!--</mat-form-field>-->
+
+                    <!--<mat-form-field appearance="outline">-->
+                        <!--<mat-label>Passport</mat-label>-->
+                        <!--<input matInput type="text" [(ngModel)]="user.passport"/>-->
+                    <!--</mat-form-field>-->
+
+                    <mat-radio-group class="radio" [(ngModel)]="user.gender">
+                        <mat-label class="radio-label">Select gender:</mat-label>
+                        <mat-radio-button [value]="0">Male</mat-radio-button>
+                        <mat-radio-button [value]="1">Female</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="button-container">
+                    <div class="stepper-button button">
+                        <button mat-button (click)="makeReservation()">Book ticket</button>
+                    </div>
+                </div>
+            </mat-step>
+
+        </mat-horizontal-stepper>
+    </div>
+
+
+</div>

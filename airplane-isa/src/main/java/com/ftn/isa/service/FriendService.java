@@ -2,7 +2,6 @@ package com.ftn.isa.service;
 
 import java.util.List;
 
-import com.ftn.isa.model.Friend;
 import com.ftn.isa.payload.FriendDTO;
 
 public interface FriendService {

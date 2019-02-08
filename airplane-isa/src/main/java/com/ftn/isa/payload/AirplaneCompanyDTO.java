@@ -1,40 +1,43 @@
 package com.ftn.isa.payload;
 
+import com.ftn.isa.model.AirplaneCompany;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ftn.isa.model.AirplaneCompany;
-import com.ftn.isa.model.Destination;
-
 public class AirplaneCompanyDTO {
 
-	private long id;
+	private Long id;
 	private String name;
 	private String address;
 	private String promoDescription;
 	private String luggageType;
-	private int luggagePrice;
-	private double avrageRate;
-	private List<DestinationDTO> destinations = new ArrayList<DestinationDTO>();
+	private Integer luggagePrice;
+	private Double avrageRate;
+	private List<DestinationDTO> destinations = new ArrayList<>();
 
-	public AirplaneCompanyDTO(long id, String name, String address, String promoDescription, String luggageType,
-			int luggagePrice, double avrageRate) {
-		this.id = id;
-		this.name = name;
-		this.address = address;
-		this.promoDescription = promoDescription;
-		this.luggageType = luggageType;
-		this.luggagePrice = luggagePrice;
-		this.avrageRate = avrageRate;
+	public AirplaneCompanyDTO(AirplaneCompany airplaneCompany) {
+		this.id = airplaneCompany.getId();
+		this.name = airplaneCompany.getName();
+		this.address = airplaneCompany.getAddress();
+		this.promoDescription = airplaneCompany.getPromoDescription();
+		this.luggageType = airplaneCompany.getLuggageType();
+		this.luggagePrice = airplaneCompany.getLuggagePrice();
+		this.avrageRate = airplaneCompany.getAvrageRate();
+
+		if (!airplaneCompany.getDestinations().isEmpty()) {
+			airplaneCompany.getDestinations()
+					.forEach(destination -> this.destinations.add(new DestinationDTO(destination)));
+		}
 	}
-	
+
 	public AirplaneCompanyDTO() {}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -70,19 +73,19 @@ public class AirplaneCompanyDTO {
 		this.luggageType = luggageType;
 	}
 
-	public int getLuggagePrice() {
+	public Integer getLuggagePrice() {
 		return luggagePrice;
 	}
 
-	public void setLuggagePrice(int luggagePrice) {
+	public void setLuggagePrice(Integer luggagePrice) {
 		this.luggagePrice = luggagePrice;
 	}
 
-	public double getAvrageRate() {
+	public Double getAvrageRate() {
 		return avrageRate;
 	}
 
-	public void setAvrageRate(double avrageRate) {
+	public void setAvrageRate(Double avrageRate) {
 		this.avrageRate = avrageRate;
 	}
 
@@ -93,24 +96,4 @@ public class AirplaneCompanyDTO {
 	public void setDestinations(List<DestinationDTO> destinations) {
 		this.destinations = destinations;
 	}
-	
-	public AirplaneCompany convertToModel(AirplaneCompanyDTO airplaneCompanyDTO) {
-		AirplaneCompany airplaneCompany = new AirplaneCompany();
-		
-		airplaneCompany.setId(airplaneCompanyDTO.getId());
-		airplaneCompany.setName(airplaneCompanyDTO.getName());
-		airplaneCompany.setAddress(airplaneCompanyDTO.getAddress());
-		airplaneCompany.setPromoDescription(airplaneCompanyDTO.getPromoDescription());
-		airplaneCompany.setLuggageType(airplaneCompanyDTO.getLuggageType());
-		airplaneCompany.setLuggagePrice(airplaneCompanyDTO.getLuggagePrice());
-		airplaneCompany.setAvrageRate(airplaneCompanyDTO.getAvrageRate());
-		
-		return airplaneCompany;
-	}
-	
-	public AirplaneCompanyDTO convertToDTO(AirplaneCompany airplaneCompany) {
-		return new AirplaneCompanyDTO(airplaneCompany.getId(), airplaneCompany.getName(), airplaneCompany.getAddress(), airplaneCompany.getPromoDescription(), airplaneCompany.getLuggageType(),
-				airplaneCompany.getLuggagePrice(), airplaneCompany.getAvrageRate());
-	}
-
 }

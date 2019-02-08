@@ -62,12 +62,12 @@ public class AuthController {
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        
+
         User user = userRepository.findByEmail(loginRequest.getUsernameOrEmail());
         Role role = user.getRoles().iterator().next();
 
         String jwt = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthenticationResponse(user.getFirstName(), user.getLastName(), user.getDateOfBirth(),
+        return ResponseEntity.ok(new JwtAuthenticationResponse(user.getFirstName(), user.getLastName(), user.getEmail(), user.getDateOfBirth(),
         		user.getPhoneNumber(), role.getName().name(), jwt));
     }
 

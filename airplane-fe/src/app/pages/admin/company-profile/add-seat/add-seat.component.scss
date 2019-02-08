@@ -1,0 +1,141 @@
+$text-color: #363636;
+$available__background: #FFFFFF;
+$available__background-hover: #f2f2f2;
+$taken__background: #CCCCCC;
+$selected__background: #576EA7;
+
+.dialog {
+    display: flex;
+    flex-direction: column;
+
+    .mat-dialog-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px;
+        background-color: #009688;
+        color: #FFFFFF;
+
+        .title {
+
+        }
+        .close {
+
+        }
+    }
+
+    .dialog-content {
+        margin: 0;
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+
+            .guide {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .item {
+                    margin: 0 12px;
+                    width: 24px;
+                    height: 24px;
+                    border: 1px solid $taken__background;
+                }
+                .available {
+                    background-color: $available__background;
+                }
+                .taken {
+                    background-color: $taken__background;
+                }
+                .selected {
+                    background-color: $selected__background;
+                }
+            }
+
+            .add-new {
+
+            }
+        }
+
+
+
+        .seats-row {
+            display: flex;
+
+            .row-number {
+                align-items: center;
+                margin-right: 12px;
+                display: flex;
+                justify-content: center;
+                width: 24px;
+            }
+            .seats-container {
+                display: flex;
+
+                .seat {
+                    width: 48px;
+                    height: 48px;
+                    margin: 1px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: $text-color;
+                    border: 1px solid $taken__background;
+                }
+                .taken {
+                    background-color: $taken__background;
+                    color: #929292;
+                    cursor: not-allowed;
+                }
+                .available {
+                    background-color: $available__background;
+                    cursor: pointer;
+                }
+                .available:hover {
+                    background-color: $available__background-hover;
+                }
+                .selected {
+                    background-color: $selected__background;
+                    color: $available__background;
+                    cursor: pointer;
+                }
+                .spaced {
+                    margin-right: 24px;
+                }
+            }
+
+            .config-container {
+                display: flex;
+                align-items: center;
+
+                .actions {
+                    margin-right: 6px;
+
+                    .deletable {
+                        cursor: not-allowed;
+                    }
+                }
+                .config {
+
+                }
+            }
+        }
+        .seats-row.forDelete {
+            color: #FF0000;
+            background-color: #faebd7;
+        }
+        .seats-row.forAdd {
+            color: #008000;
+            background-color: #8fbc8f;
+        }
+    }
+
+    .dialog-actions {
+        margin: 0;
+        padding: 8px 24px;
+        justify-content: flex-end;
+    }
+}

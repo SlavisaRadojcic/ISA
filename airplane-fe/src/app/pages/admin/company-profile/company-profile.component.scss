@@ -1,0 +1,88 @@
+.company-profile {
+    display: flex;
+    padding: 0 24px;
+    position: relative;
+
+
+    .basic-info {
+        display: flex;
+        flex-direction: column;
+        margin-right: 24px;
+        width: 300px;
+
+        h3 {
+            font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .profile-form {
+            display: flex;
+            flex-direction: column;
+
+            .mat-form-field {
+                width: 100%;
+            }
+        }
+    }
+
+    .flight-info {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 45px;
+
+        .title-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .title {
+
+            }
+        }
+
+        .mat-expansion-panel-header.header {
+            background-color: #e0e0e030;
+        }
+
+        .table {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .action-cell,
+            .action-header {
+                text-align: right;
+            }
+
+            .header {
+                display: flex;
+                justify-content: space-between;
+
+                .title {
+                    margin-bottom: 6px;
+                    font-size: 12px;
+                    padding: 12px 0 0;
+                }
+                .add-flight {
+
+                }
+            }
+
+            .mat-table {
+                margin-bottom: 12px;
+            }
+        }
+
+        .actions {
+            background-color: #cccccc30;
+        }
+
+        .title {
+            font-size: 12px;
+            margin: 0 0 6px 0;
+        }
+    }
+
+
+}

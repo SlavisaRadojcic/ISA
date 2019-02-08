@@ -1,0 +1,19 @@
+<div class="login-page">
+
+    <form #loginForm="ngForm" name="login" class="login-form" (ngSubmit)="login()">
+        <h3 class="form-title">Login</h3>
+
+        <mat-form-field appearance="outline" class="username">
+            <mat-label>Username</mat-label>
+            <input matInput name="username" type="text" placeholder="Username" [(ngModel)]="username" required/>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="password">
+            <mat-label>Password</mat-label>
+            <input matInput name="password" type="password" placeholder="Password" [(ngModel)]="password" required/>
+        </mat-form-field>
+
+        <button mat-raised-button class="submit" type="submit">Submit</button>
+        <button mat-button class="register" type="button" (click)="register()">Don't have account?</button>
+    </form>
+
+</div>
