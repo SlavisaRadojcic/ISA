@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FlightSearchResultDTO} from "./flight-search-result.dto";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FlightSearchService} from "./flight-search.service";
+import { FlightSearchService } from '../flight-search/flight-search.service';
 
 @Component({
     selector: 'app-search-results',

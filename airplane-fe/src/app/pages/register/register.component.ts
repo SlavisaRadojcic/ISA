@@ -49,10 +49,12 @@ export class RegisterComponent implements OnInit {
     register() {
         this.userProfileDTO.password = this.passwords.original;
         this.registerService.register(
-            this.userProfileDTO.firstName + ' ' + this.userProfileDTO.lastName,
-            this.userProfileDTO.username,
+            this.userProfileDTO.firstName,
+            this.userProfileDTO.lastName,
             this.userProfileDTO.email,
-            this.userProfileDTO.password).subscribe(data => {
+            this.userProfileDTO.password,
+            this.userProfileDTO.city,
+            this.userProfileDTO.phone).subscribe(data => {
                 this.router.navigate(['/login']);
             });
     }

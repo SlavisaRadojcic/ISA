@@ -19,4 +19,6 @@ public interface FlightService {
 	List<FlightDTO> getByDestinationId(long id);
 
 	FlightDTO update(FlightDTO flightRequest);
+	
+	List<FlightDTO> getAllFilightsWithDiscount();
 }

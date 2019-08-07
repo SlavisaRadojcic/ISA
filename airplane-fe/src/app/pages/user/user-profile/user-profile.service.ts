@@ -9,7 +9,7 @@ import {UserProfileDTO} from "./user-profile.dto";
 })
 export class UserProfileService {
 
-    url: string = 'http://localhost:8090/api/users';
+    url: string = 'http://localhost:8080/api/users';
 
     constructor(private httpClient: HttpClient) {}
 
@@ -17,7 +17,11 @@ export class UserProfileService {
         return this.httpClient.get(this.url + '/' + id).pipe(map((result: any) => new UserProfileDTO(result)));
     }
 
+    getProfileByEmail(email: String): Observable<any> {
+        return this.httpClient.get(this.url + '/get/' + email).pipe(map((result: any) => new UserProfileDTO(result)));
+    }
+
     updateUser(dto: UserProfileDTO): Observable<any> {
-        return this.httpClient.put(this.url, dto);
+        return this.httpClient.put(this.url + "/" + dto.id, dto);
     }
 }

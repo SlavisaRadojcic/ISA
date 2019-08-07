@@ -11,7 +11,7 @@ import {map} from "rxjs/operators";
 })
 export class SeatsService {
 
-    seatsUrl: string = 'http://localhost:8090/api/seats';
+    seatsUrl: string = 'http://localhost:8080/api/seats';
 
     constructor(private httpClient: HttpClient) {}
 

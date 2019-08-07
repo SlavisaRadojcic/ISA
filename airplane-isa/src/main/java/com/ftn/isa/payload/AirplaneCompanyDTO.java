@@ -11,7 +11,7 @@ public class AirplaneCompanyDTO {
 	private String name;
 	private String address;
 	private String promoDescription;
-	private String luggageType;
+	private String luggageInfo;
 	private Integer luggagePrice;
 	private Double avrageRate;
 	private List<DestinationDTO> destinations = new ArrayList<>();
@@ -21,7 +21,7 @@ public class AirplaneCompanyDTO {
 		this.name = airplaneCompany.getName();
 		this.address = airplaneCompany.getAddress();
 		this.promoDescription = airplaneCompany.getPromoDescription();
-		this.luggageType = airplaneCompany.getLuggageType();
+		this.luggageInfo = airplaneCompany.getLuggageType();
 		this.luggagePrice = airplaneCompany.getLuggagePrice();
 		this.avrageRate = airplaneCompany.getAvrageRate();
 
@@ -65,12 +65,12 @@ public class AirplaneCompanyDTO {
 		this.promoDescription = promoDescription;
 	}
 
-	public String getLuggageType() {
-		return luggageType;
+	public String getLuggageInfo() {
+		return luggageInfo;
 	}
 
-	public void setLuggageType(String luggageType) {
-		this.luggageType = luggageType;
+	public void setLuggageInfo(String luggageInfo) {
+		this.luggageInfo = luggageInfo;
 	}
 
 	public Integer getLuggagePrice() {

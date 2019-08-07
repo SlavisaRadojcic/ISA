@@ -1,7 +1,5 @@
 package com.ftn.isa.payload;
 
-import java.util.Date;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -25,8 +23,6 @@ public class SignUpRequest {
     @NotBlank
     @Size(min = 6, max = 20)
     private String password;
-    
-	private Date dateOfBirth;
 	
 	private String phoneNumber;
 	

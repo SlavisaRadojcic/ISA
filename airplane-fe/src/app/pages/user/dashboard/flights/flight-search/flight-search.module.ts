@@ -13,6 +13,8 @@ import {
 import {FormsModule} from "@angular/forms";
 import {FlightSearchResultModule} from "../flight-search-result/flight-search-result.module";
 import {SeatsModule} from "../seats/seats.module";
+import { FlightSearchService } from './flight-search.service';
+
 
 @NgModule({
     imports: [
@@ -37,7 +39,8 @@ import {SeatsModule} from "../seats/seats.module";
         {
             provide: MAT_DATE_LOCALE,
             useValue: 'rs'
-        }
+        },
+        FlightSearchService
     ],
 })
 export class FlightSearchModule {

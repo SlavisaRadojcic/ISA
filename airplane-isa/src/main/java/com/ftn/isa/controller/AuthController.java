@@ -2,7 +2,6 @@ package com.ftn.isa.controller;
 
 import java.net.URI;
 import java.util.Collections;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -36,65 +35,59 @@ import com.ftn.isa.security.JwtTokenProvider;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    @Autowired
-    AuthenticationManager authenticationManager;
+	@Autowired
+	AuthenticationManager authenticationManager;
 
-    @Autowired
-    UserRepository userRepository;
+	@Autowired
+	UserRepository userRepository;
 
-    @Autowired
-    RoleRepository roleRepository;
+	@Autowired
+	RoleRepository roleRepository;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
-    @Autowired
-    JwtTokenProvider tokenProvider;
+	@Autowired
+	JwtTokenProvider tokenProvider;
 
-    @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+	@PostMapping("/signin")
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsernameOrEmail(),
-                        loginRequest.getPassword()
-                )
-        );
+		Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(loginRequest.getUsernameOrEmail(), loginRequest.getPassword()));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        User user = userRepository.findByEmail(loginRequest.getUsernameOrEmail());
-        Role role = user.getRoles().iterator().next();
+		User user = userRepository.findByEmail(loginRequest.getUsernameOrEmail());
+		Role role = user.getRoles().iterator().next();
 
-        String jwt = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthenticationResponse(user.getFirstName(), user.getLastName(), user.getEmail(), user.getDateOfBirth(),
-        		user.getPhoneNumber(), role.getName().name(), jwt));
-    }
+		String jwt = tokenProvider.generateToken(authentication);
+		return ResponseEntity.ok(new JwtAuthenticationResponse(user.getFirstName(), user.getLastName(), user.getEmail(),
+				user.getPhone(), role.getName().name(), jwt));
+	}
 
 	@PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if(userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
-                    HttpStatus.BAD_REQUEST);
-        }
+	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
+		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+			return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"), HttpStatus.BAD_REQUEST);
+		}
 
-        // Creating user's account
-        User user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getEmail(),
-        		signUpRequest.getPassword(), signUpRequest.getDateOfBirth(), signUpRequest.getPhoneNumber(), false);
+		// Creating user's account
+		User user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getEmail(),
+				signUpRequest.getPassword(), signUpRequest.getPhoneNumber(), false);
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-                .orElseThrow(() -> new AppException("User Role not set."));
+		Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+				.orElseThrow(() -> new AppException("User Role not set."));
 
-        user.setRoles(Collections.singleton(userRole));
+		user.setRoles(Collections.singleton(userRole));
 
-        User result = userRepository.save(user);
+		User result = userRepository.save(user);
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/api/users/{username}")
-                .buildAndExpand(result.getEmail()).toUri();
+		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/users/{username}")
+				.buildAndExpand(result.getEmail()).toUri();
 
-        return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
-    }
+		return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
+	}
 }

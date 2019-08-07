@@ -27,7 +27,7 @@ public class FlightController {
 	public List<FlightDTO> getAllAirplaneCompanies() {
 		return flightService.getAll();
 	}
-
+	
 	@GetMapping("/{id}")
 	public FlightDTO getFlightById(@PathVariable long id) {
 		return flightService.getById(id);
@@ -62,4 +62,11 @@ public class FlightController {
 	public List<FlightDTO> getFlightByDestinationId(@PathVariable long id) {
 		return flightService.getByDestinationId(id);
 	}
+	
+	@GetMapping(path = "/discount")
+	public List<FlightDTO> getAllFlightsWithDiscount() {
+		return flightService.getAllFilightsWithDiscount();
+	}
+	
+	
 }

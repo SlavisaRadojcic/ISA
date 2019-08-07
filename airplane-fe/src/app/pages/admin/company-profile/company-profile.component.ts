@@ -32,7 +32,7 @@ export class CompanyProfileComponent implements OnInit {
     }
 
     getCompany() {
-        this.companyProfileService.getById(1).subscribe(data => {
+        this.companyProfileService.getById(2).subscribe(data => {
             if (data) {
                 this.companyProfileDTO = new CompanyProfileDTO(data);
             }
@@ -56,7 +56,11 @@ export class CompanyProfileComponent implements OnInit {
     }
 
     updateProfile() {
-
+        this.companyProfileService.updateCompany(this.companyProfileDTO).subscribe(data => {
+            if (data) {
+                this.companyProfileDTO = new CompanyProfileDTO(data);
+            }
+        });
     }
 
     prettifyTime(timeInMinutes: number): string {

@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 })
 export class LoginService {
 
-    loginUrl: string = 'http://localhost:8090/api/auth/signin';
+    loginUrl: string = 'http://localhost:8080/api/auth/signin';
 
     constructor(private httpClient: HttpClient) {
     }

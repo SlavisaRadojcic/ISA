@@ -1,11 +1,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CompanyProfileModule} from "./company-profile/company-profile.module";
+import {CompanyReportModule} from "./company-report/company-report.module";
 
 @NgModule({
     imports: [
         CommonModule,
-        CompanyProfileModule
+        CompanyProfileModule,
+        CompanyReportModule
     ],
     declarations: []
 })

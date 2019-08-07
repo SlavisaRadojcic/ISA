@@ -1,16 +1,18 @@
 package com.ftn.isa.service;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.ftn.isa.model.Destination;
 import com.ftn.isa.model.Flight;
 import com.ftn.isa.payload.FlightDTO;
 import com.ftn.isa.repository.DestinationRepository;
 import com.ftn.isa.repository.FlightRepository;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class FlightServiceImpl implements FlightService {
@@ -96,6 +98,19 @@ public class FlightServiceImpl implements FlightService {
 		}
 
 		return new FlightDTO();
+	}
+
+	@Override
+	public List<FlightDTO> getAllFilightsWithDiscount() {
+		List<FlightDTO> flightsDTO = new ArrayList<>();
+		List<Flight> flights = flightRepository.findAll();
+
+		for(Flight flight: flights) {
+			if(flight.getDateOfTakeOff().compareTo(new Date()) > 0 && flight.getDiscount() > 0)
+				flightsDTO.add(new FlightDTO(flight));
+		}
+
+		return flightsDTO;
 	}
 
 

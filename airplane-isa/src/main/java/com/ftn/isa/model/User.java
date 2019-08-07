@@ -1,12 +1,10 @@
 package com.ftn.isa.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,7 +19,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 
@@ -42,20 +39,14 @@ public class User {
 	@Column(name = "last_name")
 	private String lastName;
 	
-	@Column(name = "username")
-	private String userName;
-	
 	@Column(name = "email")
 	private String email;
 	
 	@Column(name = "password")
 	private String password;
 	
-	@Column(name = "date_of_birth")
-	private Date dateOfBirth;
-	
 	@Column(name = "phone_number")
-	private String phoneNumber;
+	private String phone;
 	
 	@Column(name = "first_time_login")
 	private boolean firstTimeLogin;
@@ -65,6 +56,9 @@ public class User {
 	
 	@Column(name = "score")
 	private int score;
+	
+	@Column(name = "city")
+	private String city;
 	
 	@JsonBackReference(value = "roles_reference")
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -79,13 +73,12 @@ public class User {
 	
 	public User() {}
 	
-	public User(String firstName, String lastName, String email, String password, Date dateOfBirth, String phoneNumber, boolean firstTimeLogin) {
+	public User(String firstName, String lastName, String email, String password, String phoneNumber, boolean firstTimeLogin) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.dateOfBirth = dateOfBirth;
-		this.phoneNumber = phoneNumber;
+		this.phone = phoneNumber;
 		this.firstTimeLogin = firstTimeLogin;
 	}
 

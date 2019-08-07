@@ -41,10 +41,17 @@ public class AirplaneCompanyServiceImpl implements AirplaneCompanyService {
 	@Override
 	public AirplaneCompanyDTO save(AirplaneCompanyDTO dto) {
 		AirplaneCompany airplaneCompany = new AirplaneCompany();
+		if(dto.getId() != null) {
+			airplaneCompany.setId(dto.getId());
+		}
 		airplaneCompany.setAddress(dto.getAddress());
-		airplaneCompany.setAvrageRate(dto.getAvrageRate());
+		if(dto.getId() == null) {
+			airplaneCompany.setAvrageRate(0);
+		} else {
+			airplaneCompany.setAvrageRate(dto.getAvrageRate());
+		}
 		airplaneCompany.setLuggagePrice(dto.getLuggagePrice() != null ? dto.getLuggagePrice() : 0);
-		airplaneCompany.setLuggageType(dto.getLuggageType());
+		airplaneCompany.setLuggageType(dto.getLuggageInfo());
 		airplaneCompany.setName(dto.getName());
 		airplaneCompany.setPromoDescription(dto.getPromoDescription());
 

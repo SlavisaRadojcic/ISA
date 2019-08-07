@@ -37,6 +37,11 @@ public class UserController {
 		return userService.getUserById(userId);
 	}
 	
+	@GetMapping("/get/{email}")
+	public UserDTO getUserByEmail(@PathVariable String email) {
+		return userService.getUserByEmail(email);
+	}
+	
 	@PostMapping
 	@PreAuthorize("hasRole('USER')")
 	public FriendDTO addNewFrind(@RequestBody FriendDTO friend) {
@@ -49,9 +54,9 @@ public class UserController {
 		return friendService.changeStatus(id, status);
 	}
 	
-	@PutMapping
-	@PreAuthorize("hasRole('ADMIN')")
-	public UserDTO editUser(@RequestBody UserDTO user) {
-		return userService.save(user);
+	@PutMapping("/{id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	public UserDTO editUser(@PathVariable Long id, @RequestBody UserDTO user) {
+		return userService.update(id, user);
 	}
 }

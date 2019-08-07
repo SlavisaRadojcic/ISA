@@ -11,10 +11,10 @@ import {SeatDTO} from "./seat.dto";
 })
 export class CompanyProfileService {
 
-    private companyUrl: string = 'http://localhost:8090/api/airplane-companies';
-    private flightUrl: string = 'http://localhost:8090/api/flight';
-    private destinationUrl: string = 'http://localhost:8090/api/destinations';
-    private seatsUrl: string = 'http://localhost:8090/api/seats';
+    private companyUrl: string = 'http://localhost:8080/api/airplane-companies';
+    private flightUrl: string = 'http://localhost:8080/api/flight';
+    private destinationUrl: string = 'http://localhost:8080/api/destinations';
+    private seatsUrl: string = 'http://localhost:8080/api/seats';
 
     constructor(private httpClient: HttpClient) {
     }

@@ -1,9 +1,9 @@
 package com.ftn.isa.payload;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import com.ftn.isa.model.Role;
 import com.ftn.isa.model.User;
 
 public class UserDTO {
@@ -13,14 +13,16 @@ public class UserDTO {
 	private String lastName;
 	private String email;
 	private String password;
-	private Date dateOfBirth;
-	private String phoneNumber;
+	private String phone;
 	private boolean firstTimeLogin;
 	private String passport;
 	private Integer score;
+	private String city;
 	private List<FriendDTO> friends = new ArrayList<>();
+	private Role role;
 
-	public UserDTO() {}
+	public UserDTO() {
+	}
 
 	public UserDTO(User user) {
 		this.id = user.getId();
@@ -28,11 +30,11 @@ public class UserDTO {
 		this.lastName = user.getLastName();
 		this.email = user.getEmail();
 		this.password = user.getPassword();
-		this.dateOfBirth = user.getDateOfBirth();
-		this.phoneNumber = user.getPhoneNumber();
+		this.phone = user.getPhone();
 		this.firstTimeLogin = user.isFirstTimeLogin();
 		this.passport = user.getPasseport();
 		this.score = user.getScore();
+		this.city = user.getCity();
 
 		if (!user.getFriends().isEmpty()) {
 			user.getFriends().forEach(friend -> this.friends.add(new FriendDTO(friend)));
@@ -79,20 +81,12 @@ public class UserDTO {
 		this.password = password;
 	}
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public boolean isFirstTimeLogin() {
@@ -119,6 +113,14 @@ public class UserDTO {
 		this.score = score;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 	public List<FriendDTO> getFriends() {
 		return friends;
 	}
@@ -126,4 +128,13 @@ public class UserDTO {
 	public void setFriends(List<FriendDTO> friends) {
 		this.friends = friends;
 	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	
 }

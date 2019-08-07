@@ -3,15 +3,15 @@
     <form #profile="ngForm" name="profile" class="profile-form" (ngSubmit)="updateProfile()">
         <mat-form-field appearance="outline" class="text">
             <mat-label>Email</mat-label>
-            <input matInput name="email" type="email" placeholder="email" [(ngModel)]="userProfileDTO.email" required/>
+            <input matInput name="email" type="email" placeholder="Email" [(ngModel)]="userProfileDTO.email" required/>
         </mat-form-field>
         <mat-form-field appearance="outline" class="text">
-            <mat-label>Current password</mat-label>
+            <mat-label>New password</mat-label>
             <input matInput name="current_password" type="password" placeholder="Password" [(ngModel)]="changePassword.oldPassword"/>
         </mat-form-field>
         <mat-form-field appearance="outline" class="text">
             <mat-label>New password</mat-label>
-            <input matInput name="new_password" type="password" placeholder="Password" [(ngModel)]="changePassword.oldPassword"/>
+            <input matInput name="new_password" type="password" placeholder="Password" [(ngModel)]="changePassword.newPassword"/>
         </mat-form-field>
         <mat-form-field appearance="outline" class="text">
             <mat-label>First name</mat-label>
@@ -29,7 +29,8 @@
             <mat-label>Phone</mat-label>
             <input matInput name="phone" type="tel" placeholder="phone" [(ngModel)]="userProfileDTO.phone"/>
         </mat-form-field>
-
+        <input name="id" type="hidden" [(ngModel)]="userProfileDTO.id"/>
+        
         <button mat-button class="submit" type="submit">Submit</button>
     </form>
 

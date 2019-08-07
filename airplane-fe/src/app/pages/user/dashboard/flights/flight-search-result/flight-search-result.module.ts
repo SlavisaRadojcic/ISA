@@ -13,7 +13,6 @@ import {
 } from "@angular/material";
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
-import {FlightSearchService} from "./flight-search.service";
 
 @NgModule({
     imports: [
@@ -33,7 +32,6 @@ import {FlightSearchService} from "./flight-search.service";
         FlightSearchResultComponent
     ],
     providers: [
-        FlightSearchService
     ],
     exports: [
         FlightSearchResultComponent

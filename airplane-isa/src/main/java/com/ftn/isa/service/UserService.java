@@ -7,4 +7,8 @@ public interface UserService {
 	UserDTO getUserById(long id);
 	
 	UserDTO save(UserDTO user);
+	
+	UserDTO getUserByEmail(String email);
+	
+	UserDTO update(Long id, UserDTO userDTO);
 }

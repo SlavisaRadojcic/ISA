@@ -13,7 +13,7 @@ import {UserRole} from "../user/user-profile/user-role";
 })
 export class LoginComponent implements OnInit {
 
-    username: string;
+    email: string;
     password: string;
 
     constructor(private router: Router,
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        this.loginService.login(this.username, this.password).subscribe((response: ResponseDto) => {
+        this.loginService.login(this.email, this.password).subscribe((response: ResponseDto) => {
             if (response.accessToken) {
                 this.authService.setToken(response.accessToken);
 
@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
                 user.email = response.email;
                 user.phone = response.phoneNumber;
                 user.role = response.role;
-                user.birthday = response.dateOfBirth;
 
                 this.authService.setLoggedInUser(user);
 

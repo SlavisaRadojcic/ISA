@@ -7,17 +7,19 @@ import {HttpClient} from "@angular/common/http";
 })
 export class RegisterService {
 
-    registerUrl: string = 'http://localhost:8090/api/auth/signup';
+    registerUrl: string = 'http://localhost:8080/api/auth/signup';
 
     constructor(private httpClient: HttpClient) {
     }
 
-    register(name: string, username: string, email: string, password: string): Observable<any> {
+    register(firstName: string, lastName: string, email: string, password: string, city: string, phone: string): Observable<any> {
         return this.httpClient.post(this.registerUrl, {
-            name: name,
-            username: username,
+            firstName: firstName,
+            lastName: lastName,
             email: email,
-            password: password
+            password: password,
+            city: city,
+            phoneNumber: phone
         });
     }
 }

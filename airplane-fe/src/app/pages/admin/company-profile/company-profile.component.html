@@ -25,8 +25,10 @@
                 <textarea matInput name="luggageInfo" type="text"
                           [(ngModel)]="companyProfileDTO.luggageInfo"></textarea>
             </mat-form-field>
+            
+            <input name="id" type="hidden" [(ngModel)]="companyProfileDTO.id"/>
 
-            <button mat-button class="submit" type="submit">Submit</button>
+            <button mat-button class="submit" type="submit" (ngSubmit)="updateProfile()">Submit</button>
         </form>
     </div>
 
