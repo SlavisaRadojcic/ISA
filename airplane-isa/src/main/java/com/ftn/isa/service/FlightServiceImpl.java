@@ -1,5 +1,6 @@
 package com.ftn.isa.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.ftn.isa.model.Destination;
 import com.ftn.isa.model.Flight;
 import com.ftn.isa.payload.FlightDTO;
+import com.ftn.isa.payload.SearchDTO;
 import com.ftn.isa.repository.DestinationRepository;
 import com.ftn.isa.repository.FlightRepository;
 
@@ -22,6 +24,8 @@ public class FlightServiceImpl implements FlightService {
 
 	@Autowired
 	DestinationRepository destinationRepository;
+	
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
 	@Override
 	public List<FlightDTO> getAll() {
@@ -110,6 +114,30 @@ public class FlightServiceImpl implements FlightService {
 				flightsDTO.add(new FlightDTO(flight));
 		}
 
+		return flightsDTO;
+	}
+
+	@Override
+	public List<FlightDTO> search(SearchDTO dto) {
+		List<FlightDTO> flightsDTO = new ArrayList<>();
+		List<Flight> flights = flightRepository.findAll();
+		
+		for(Flight flight: flights) {
+			if(flight.getStartingPoint().equals(dto.getFrom())) {
+				flightsDTO.add(new FlightDTO(flight));
+			} else if(flight.getEndingPoint().equals(dto.getTo())) {
+				flightsDTO.add(new FlightDTO(flight));
+			} else if(dto.getDepart() != null && sdf.format(flight.getDateOfTakeOff()).equals(sdf.format(dto.getDepart()))) {
+				flightsDTO.add(new FlightDTO(flight));
+			} else if(dto.getArrival()!= null && sdf.format(flight.getDateOfLanding()).equals(sdf.format(dto.getArrival()))) {
+				flightsDTO.add(new FlightDTO(flight));
+			} else if(flight.getFlightClass() != null && flight.getFlightClass().equals(dto.getFlightClass())) {
+				flightsDTO.add(new FlightDTO(flight));
+			} else if(flight.getFlightType() != null && flight.getFlightType().equals(dto.getFlightType())) {
+				flightsDTO.add(new FlightDTO(flight));
+			}
+		}
+		
 		return flightsDTO;
 	}
 

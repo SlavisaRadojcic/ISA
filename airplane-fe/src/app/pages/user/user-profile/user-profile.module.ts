@@ -6,6 +6,7 @@ import {FormsModule} from "@angular/forms";
 import {LayoutModule} from "@angular/cdk/layout";
 import {UserProfileService} from "./user-profile.service";
 import {HttpClientModule} from "@angular/common/http";
+import {ChangePasswordComponent} from './change-password/change-password.component';
 
 @NgModule({
     imports: [
@@ -18,13 +19,15 @@ import {HttpClientModule} from "@angular/common/http";
         HttpClientModule
     ],
     declarations: [
-        UserProfileComponent
+        UserProfileComponent,
+        ChangePasswordComponent
     ],
     providers: [
         UserProfileService
     ],
     exports: [
-        UserProfileComponent
+        UserProfileComponent,
+        ChangePasswordComponent
     ]
 })
 export class UserProfileModule {

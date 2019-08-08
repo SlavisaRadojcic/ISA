@@ -10,7 +10,8 @@ import {
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule
 } from "@angular/material";
 import {FormsModule} from "@angular/forms";
 import {LayoutModule} from "@angular/cdk/layout";
@@ -21,6 +22,7 @@ import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
 import {AddDestinationComponent} from './add-destination/add-destination.component';
 import {AddSeatComponent} from './add-seat/add-seat.component';
 import {AuthService} from "../../../config/auth.service";
+import {AddRatingComponent} from './add-rating/add-rating.component';
 
 @NgModule({
     imports: [
@@ -37,6 +39,7 @@ import {AuthService} from "../../../config/auth.service";
         MatExpansionModule,
         MatDatepickerModule,
         MatCheckboxModule,
+        MatSelectModule,
         NgxMaterialTimepickerModule.forRoot()
     ],
     providers: [
@@ -50,13 +53,15 @@ import {AuthService} from "../../../config/auth.service";
     entryComponents: [
         AddFlightComponent,
         AddDestinationComponent,
-        AddSeatComponent
+        AddSeatComponent,
+        AddRatingComponent
     ],
     declarations: [
         CompanyProfileComponent,
         AddFlightComponent,
         AddDestinationComponent,
-        AddSeatComponent
+        AddSeatComponent,
+        AddRatingComponent
     ],
     exports: [
         CompanyProfileComponent

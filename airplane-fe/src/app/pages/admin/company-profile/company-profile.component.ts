@@ -8,6 +8,7 @@ import {min} from "rxjs/operators";
 import {AddFlightComponent} from "./add-flight/add-flight.component";
 import {AddDestinationComponent} from "./add-destination/add-destination.component";
 import {AddSeatComponent} from "./add-seat/add-seat.component";
+import {AddRatingComponent} from "./add-rating/add-rating.component";
 
 @Component({
     selector: 'app-company-profile',
@@ -32,7 +33,7 @@ export class CompanyProfileComponent implements OnInit {
     }
 
     getCompany() {
-        this.companyProfileService.getById(2).subscribe(data => {
+        this.companyProfileService.getById(5).subscribe(data => {
             if (data) {
                 this.companyProfileDTO = new CompanyProfileDTO(data);
             }
@@ -130,6 +131,22 @@ export class CompanyProfileComponent implements OnInit {
 
     deleteDestination(destination: DestinationDTO) {
         this.companyProfileService.deleteDestination(destination.id).subscribe(() => this.getCompany());
+    }
+
+    addRating() {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.hasBackdrop = true;
+        dialogConfig.panelClass = 'add-rating-dialog';
+        dialogConfig.data = this.companyProfileDTO;
+
+        const dialogRef = this.dialog.open(AddRatingComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.getCompany();
+            }
+        });
     }
 
 }

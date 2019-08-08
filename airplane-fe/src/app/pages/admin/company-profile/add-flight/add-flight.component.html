@@ -83,6 +83,20 @@
                         <mat-label>Discount</mat-label>
                         <input matInput name="discount" type="number" [(ngModel)]="flight.discount"/>
                     </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Flight type</mat-label>
+                        <mat-select name="flightType" placeholder="Flight type" [(ngModel)]="flight.flightType">
+                            <mat-option *ngFor="let type of flightTypes" [value]="type">{{ type }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Class</mat-label>
+                        <mat-select name="flightClass" placeholder="Flight class" [(ngModel)]="flight.flightClass">
+                            <mat-option *ngFor="let flightClass of flightClasses" [value]="flightClass">{{ flightClass }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </div>
             </div>
 

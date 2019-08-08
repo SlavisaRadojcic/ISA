@@ -1,4 +1,6 @@
 import {SeatDTO} from "./seat.dto";
+import {FlightTypeEnum} from "./../../user/dashboard/flights/flight-search/flight-type.enum";
+import {FlightClassEnum} from "./../../user/dashboard/flights/flight-search/flight-class.enum";
 
 export class FlightDTO {
 
@@ -16,6 +18,8 @@ export class FlightDTO {
     discount: number;
     avrageRate: number;
     seats: SeatDTO[];
+    flightType: FlightTypeEnum;
+    flightClass: FlightClassEnum;
 
     constructor(data?: any) {
         if (data) {
@@ -33,6 +37,8 @@ export class FlightDTO {
             this.discount = data.discount;
             this.avrageRate = data.avrageRate;
             this.seats = data.seats;
+            this.flightType = data.flightType;
+            this.flightClass = data.flightClass;
         }
     }
 

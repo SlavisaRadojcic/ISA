@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.isa.payload.FlightDTO;
+import com.ftn.isa.payload.SearchDTO;
 import com.ftn.isa.service.FlightService;
 
 @RestController
@@ -51,10 +52,10 @@ public class FlightController {
 		return flightService.update(flightRequest);
 	}
 
-	@PostMapping("/vote/{flightId}/{rate}")
+	@GetMapping("/vote/{flightId}/{flightRate}")
 	@PreAuthorize("hasRole('USER')")
-	public FlightDTO vote(@PathVariable long flightId, @PathVariable double rate) {
-		return flightService.vote(flightId, rate);
+	public FlightDTO vote(@PathVariable long flightId, @PathVariable double flightRate) {
+		return flightService.vote(flightId, flightRate);
 	}
 
 	@GetMapping("/destination/{id}")
@@ -66,6 +67,11 @@ public class FlightController {
 	@GetMapping(path = "/discount")
 	public List<FlightDTO> getAllFlightsWithDiscount() {
 		return flightService.getAllFilightsWithDiscount();
+	}
+	
+	@PostMapping(path = "/search")
+	public List<FlightDTO> searchFlights(@RequestBody SearchDTO dto) {
+		return flightService.search(dto);
 	}
 	
 	

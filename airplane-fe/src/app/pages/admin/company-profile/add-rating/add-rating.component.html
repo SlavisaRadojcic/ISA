@@ -1,0 +1,26 @@
+<form #addRatingForm="ngForm" (keydown.enter)="$event.preventDefault()" novalidate>
+    <div class="dialog">
+        <div mat-dialog-title>
+            <div class="title">Rate company</div>
+            <div class="close">
+                <button mat-icon-button type="button">
+                    <mat-icon (click)="close()">close</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <mat-dialog-content class="dialog-content">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Rate</mat-label>
+                <input matInput name="name" type="number" [(ngModel)]="companyRate"/>
+            </mat-form-field>
+
+        </mat-dialog-content>
+
+        <mat-dialog-actions class="dialog-actions">
+            <button mat-button (click)="submit()" type="button">Vote</button>
+            <button mat-button (click)="close()" type="button">Close</button>
+        </mat-dialog-actions>
+    </div>
+</form>

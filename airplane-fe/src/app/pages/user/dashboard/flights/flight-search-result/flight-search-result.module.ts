@@ -9,10 +9,12 @@ import {
     MatInputModule,
     MatSelectModule,
     MatSliderModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
 } from "@angular/material";
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
+import {AddFlightRatingComponent} from "./../add-flight-rating/add-flight-rating.component";
 
 @NgModule({
     imports: [
@@ -26,10 +28,16 @@ import {RouterModule} from "@angular/router";
         MatDividerModule,
         MatCheckboxModule,
         MatSelectModule,
-        RouterModule
+        RouterModule,
+        MatDialogModule
+    ],
+    entryComponents: [
+        FlightSearchResultComponent,
+        AddFlightRatingComponent
     ],
     declarations: [
-        FlightSearchResultComponent
+        FlightSearchResultComponent,
+        AddFlightRatingComponent
     ],
     providers: [
     ],

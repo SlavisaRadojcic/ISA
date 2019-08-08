@@ -58,4 +58,8 @@ export class CompanyProfileService {
     deleteSeats(seats: SeatDTO[]): Observable<any> {
         return this.httpClient.post(this.seatsUrl + '/deleteSeats', seats);
     }
+
+    rateCompany(companyId: number, rating: number): Observable<any> {
+        return this.httpClient.get(this.companyUrl + '/vote/' + companyId + '/' + rating);
+    }
 }

@@ -3,6 +3,7 @@ package com.ftn.isa.service;
 import java.util.List;
 
 import com.ftn.isa.payload.FlightDTO;
+import com.ftn.isa.payload.SearchDTO;
 
 public interface FlightService {
 
@@ -21,4 +22,6 @@ public interface FlightService {
 	FlightDTO update(FlightDTO flightRequest);
 	
 	List<FlightDTO> getAllFilightsWithDiscount();
+	
+	List<FlightDTO> search(SearchDTO dto);
 }

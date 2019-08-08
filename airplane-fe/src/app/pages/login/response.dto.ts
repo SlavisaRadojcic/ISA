@@ -8,6 +8,7 @@ export class ResponseDto {
     lastName: string;
     phoneNumber: string;
     role: UserRole;
+    firstTimeLogin: boolean;
 
     constructor(data: any) {
         this.accessToken = data.accessToken;
@@ -17,5 +18,6 @@ export class ResponseDto {
         this.lastName = data.lastName;
         this.phoneNumber = data.phoneNumber;
         this.role = data.role;
+        this.firstTimeLogin = data.firstTimeLogin;
     }
 }

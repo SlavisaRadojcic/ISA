@@ -11,6 +11,7 @@ import {HotelSearchComponent} from "./pages/user/dashboard/hotels/hotel-search/h
 import {CarSearchComponent} from "./pages/user/dashboard/cars/car-search/car-search.component";
 import {SeatsComponent} from "./pages/user/dashboard/flights/seats/seats.component";
 import {CompanyDashboardComponent} from "./pages/admin/company-dashboard/company-dashboard.component";
+import {ChangePasswordComponent} from "./pages/user/user-profile/change-password/change-password.component";
 
 const routes: Routes = [
     {
@@ -77,6 +78,10 @@ const routes: Routes = [
             {
                 path: 'user-profile',
                 component: UserProfileComponent
+            },
+            {
+                path: 'change-password',
+                component: ChangePasswordComponent
             }
         ]
     }

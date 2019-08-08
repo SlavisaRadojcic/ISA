@@ -3,6 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {FlightDTO} from "../flight.dto";
 import {CompanyProfileService} from "../company-profile.service";
 import {DestinationDTO} from "../destination.dto";
+import {FlightTypeEnum} from "./../../../user/dashboard/flights/flight-search/flight-type.enum";
+import {FlightClassEnum} from "./../../../user/dashboard/flights/flight-search/flight-class.enum";
 
 @Component({
     selector: 'app-add-flight',
@@ -17,6 +19,8 @@ export class AddFlightComponent implements OnInit {
     takeOffTime: string;
     landingTime: string;
     flight: FlightDTO = new FlightDTO();
+    flightTypes: string[] = [FlightTypeEnum.ONE_WAY, FlightTypeEnum.MULTI_CITY, FlightTypeEnum.ROUND_TRIP];
+    flightClasses: string[] = [FlightClassEnum.BUSINESS, FlightClassEnum.ECONOMY, FlightClassEnum.FIRST];
 
     constructor(public dialogRef: MatDialogRef<AddFlightComponent>,
                 @Inject(MAT_DIALOG_DATA) public data,

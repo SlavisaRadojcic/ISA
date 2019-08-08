@@ -1,0 +1,36 @@
+form {
+    .dialog {
+        display: flex;
+        flex-direction: column;
+
+        .mat-dialog-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background-color: #009688;
+            color: #FFFFFF;
+
+            .title {
+
+            }
+            .close {
+
+            }
+        }
+
+        .dialog-content {
+            display: flex;
+            margin: 0;
+            padding: 0 24px;
+            height: 100%;
+
+        }
+
+        .dialog-actions {
+            margin: 0;
+            padding: 8px 24px;
+            justify-content: flex-end;
+        }
+    }
+}

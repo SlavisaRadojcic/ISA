@@ -27,6 +27,7 @@
             </mat-form-field>
             
             <input name="id" type="hidden" [(ngModel)]="companyProfileDTO.id"/>
+            <button mat-icon-button (click)="addRating()"><mat-icon>star</mat-icon></button>
 
             <button mat-button class="submit" type="submit" (ngSubmit)="updateProfile()">Submit</button>
         </form>

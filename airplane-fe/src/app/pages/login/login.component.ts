@@ -39,6 +39,11 @@ export class LoginComponent implements OnInit {
                 this.authService.setLoggedInUser(user);
 
                 if (user.role.toString() === 'ROLE_ADMIN') {
+                    if(!response.firstTimeLogin) {
+                        // this.router.navigate(['change-password']);
+                    } else {
+                        this.router.navigate(['company-dashboard', 'company-profile']);
+                    }
                     this.router.navigate(['company-dashboard', 'company-profile']);
                 } else {
                     this.router.navigate(['dashboard']);

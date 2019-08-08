@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import {MatDialog, MatDialogConfig, MatTableDataSource} from "@angular/material";
 import {FlightSearchResultDTO} from "./flight-search-result.dto";
 import {ActivatedRoute, Router} from "@angular/router";
 import { FlightSearchService } from '../flight-search/flight-search.service';
+import {AddFlightRatingComponent} from "./../add-flight-rating/add-flight-rating.component";
 
 @Component({
     selector: 'app-search-results',
@@ -14,10 +16,15 @@ export class FlightSearchResultComponent implements OnInit {
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private flightService: FlightSearchService) {
+                private flightService: FlightSearchService,
+                private dialog: MatDialog) {
     }
 
     ngOnInit() {
+        this.getFlights();
+    }
+
+    getFlights() {
         this.flightService.getAll().subscribe((data: any[]) => {
             if (data.length > 0) {
                 this.datasource = data;
@@ -34,5 +41,25 @@ export class FlightSearchResultComponent implements OnInit {
         let minutes: number = timeInMinutes % 60;
 
         return `${hours}h ${minutes}min`;
+    }
+
+    searchResult(data: FlightSearchResultDTO[]) {
+        this.datasource = data;
+    }
+
+    addRating(flight: FlightSearchResultDTO) {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.hasBackdrop = true;
+        dialogConfig.panelClass = 'add-flight-rating-dialog';
+        dialogConfig.data = flight;
+
+        const dialogRef = this.dialog.open(AddFlightRatingComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.getFlights();
+            }
+        });
     }
 }
