@@ -27,6 +27,10 @@ export class CompanyProfileService {
         return this.httpClient.get(this.companyUrl + `/${id}`);
     }
 
+    getOne(): Observable<any> {
+        return this.httpClient.get(this.companyUrl + '/getOne');
+    }
+
     addFlight(dto: FlightDTO): Observable<any> {
         return this.httpClient.post(this.flightUrl, dto);
     }

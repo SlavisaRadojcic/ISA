@@ -3,11 +3,11 @@ package com.ftn.isa.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ftn.isa.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.ftn.isa.model.AirplaneCompany;
 import com.ftn.isa.payload.AirplaneCompanyDTO;
 import com.ftn.isa.payload.DestinationDTO;
 import com.ftn.isa.repository.AirplaneCompanyRepository;
@@ -99,6 +99,17 @@ public class AirplaneCompanyServiceImpl implements AirplaneCompanyService {
 		}
 
 		return new AirplaneCompanyDTO(airplaneCompanyRepository.save(company));
+	}
+
+	@Override
+	public AirplaneCompanyDTO getOne() {
+		List<AirplaneCompany> airplaneCompanies = airplaneCompanyRepository.findAll();
+
+		AirplaneCompanyDTO dto = new AirplaneCompanyDTO(airplaneCompanies.get(0));
+		List<DestinationDTO> destinationDTOS = destinationService.getAll();
+		dto.setDestinations(destinationDTOS);
+
+		return dto;
 	}
 
 

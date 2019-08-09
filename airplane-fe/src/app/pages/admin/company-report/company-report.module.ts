@@ -10,7 +10,8 @@ import {
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatDividerModule
 } from "@angular/material";
 import {FormsModule} from "@angular/forms";
 import {LayoutModule} from "@angular/cdk/layout";
@@ -34,6 +35,7 @@ import {AuthService} from "../../../config/auth.service";
         MatExpansionModule,
         MatDatepickerModule,
         MatCheckboxModule,
+        MatDividerModule,
         NgxMaterialTimepickerModule.forRoot()
     ],
     providers: [

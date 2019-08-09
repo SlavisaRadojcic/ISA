@@ -1,4 +1,62 @@
 <div class="company-report">
-    <mat-label>Company average rate:</mat-label>
-    <mat-label>Flights average rage:</mat-label>
+
+    <div class="mat-elevation-z8 table" style="text-align: center;">
+
+        <div class="table-header">
+            <div class="item-container">
+                <div class="label">
+                    <div class="text">Company - Avarage rate</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-content">
+            <mat-divider></mat-divider>
+            <div class="item-container">
+                <div class="item-with-price">
+                    <div class="item">
+                        <div class="time-container">
+                            <div class="data">
+                                <div class="city">{{ company.name }} &ndash; {{ company.avrageRate }} <mat-icon>star</mat-icon></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="mat-elevation-z8 table" style="text-align: center;">
+
+        <div class="table-header">
+            <div class="item-container">
+                <div class="label">
+                    <div class="text">Flights - Avarage rate</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-content">
+            <mat-divider></mat-divider>
+            <div *ngFor="let flight of flights">
+                <div class="item-container">
+                    <div class="item-with-price">
+                        <div class="item">
+                            <div class="time-container">
+                                <div class="data">
+                                    <div class="city">{{ flight.startingPoint }} &ndash; {{ flight.endingPoint }}
+                                         &ndash; {{ flight.avrageRate }} <mat-icon>star</mat-icon></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+    </div>
 </div>

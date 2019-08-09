@@ -23,6 +23,7 @@ import {AddDestinationComponent} from './add-destination/add-destination.compone
 import {AddSeatComponent} from './add-seat/add-seat.component';
 import {AuthService} from "../../../config/auth.service";
 import {AddRatingComponent} from './add-rating/add-rating.component';
+import {ChangePasswordComponent} from './../change-password/change-password.component';
 
 @NgModule({
     imports: [
@@ -54,14 +55,16 @@ import {AddRatingComponent} from './add-rating/add-rating.component';
         AddFlightComponent,
         AddDestinationComponent,
         AddSeatComponent,
-        AddRatingComponent
+        AddRatingComponent,
+        ChangePasswordComponent
     ],
     declarations: [
         CompanyProfileComponent,
         AddFlightComponent,
         AddDestinationComponent,
         AddSeatComponent,
-        AddRatingComponent
+        AddRatingComponent,
+        ChangePasswordComponent
     ],
     exports: [
         CompanyProfileComponent

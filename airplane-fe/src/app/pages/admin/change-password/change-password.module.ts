@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {UserProfileComponent} from './user-profile.component';
+import {ChangePasswordComponent} from './change-password.component';
 import {MatButtonModule, MatFormFieldModule, MatInputModule} from "@angular/material";
 import {FormsModule} from "@angular/forms";
 import {LayoutModule} from "@angular/cdk/layout";
-import {UserProfileService} from "./user-profile.service";
+import {ChangePasswordService} from "./change-password.service";
 import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
@@ -18,14 +18,14 @@ import {HttpClientModule} from "@angular/common/http";
         HttpClientModule
     ],
     declarations: [
-        UserProfileComponent
+        ChangePasswordComponent
     ],
     providers: [
-        UserProfileService
+        ChangePasswordService
     ],
     exports: [
-        UserProfileComponent
+        ChangePasswordComponent
     ]
 })
-export class UserProfileModule {
+export class ChangePasswordModule {
 }

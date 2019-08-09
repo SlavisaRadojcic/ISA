@@ -15,4 +15,6 @@ public interface AirplaneCompanyService {
 	AirplaneCompanyDTO getById(long id);
 	
 	AirplaneCompanyDTO vote(long companyId, double rate);
+	
+	AirplaneCompanyDTO getOne();
 }

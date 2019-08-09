@@ -10,8 +10,11 @@ public class SearchDTO {
 	private Date arrival;
 	private String flightType;
 	private String flightClass;
+	private int distanceOfFlight;
+	private double ticketPrice;
 
-	public SearchDTO(String from, String to, Date depart, Date arrival, String flightType, String flightClass) {
+	public SearchDTO(String from, String to, Date depart, Date arrival, String flightType, String flightClass,
+			int distanceOfFlight, double ticketPrice) {
 		super();
 		this.from = from;
 		this.to = to;
@@ -19,6 +22,8 @@ public class SearchDTO {
 		this.arrival = arrival;
 		this.flightType = flightType;
 		this.flightClass = flightClass;
+		this.distanceOfFlight = distanceOfFlight;
+		this.ticketPrice = ticketPrice;
 	}
 
 	public SearchDTO() {
@@ -71,6 +76,22 @@ public class SearchDTO {
 
 	public void setFlightClass(String flightClass) {
 		this.flightClass = flightClass;
+	}
+
+	public int getDistanceOfFlight() {
+		return distanceOfFlight;
+	}
+
+	public void setDistanceOfFlight(int distanceOfFlight) {
+		this.distanceOfFlight = distanceOfFlight;
+	}
+
+	public double getTicketPrice() {
+		return ticketPrice;
+	}
+
+	public void setTicketPrice(double ticketPrice) {
+		this.ticketPrice = ticketPrice;
 	}
 
 }

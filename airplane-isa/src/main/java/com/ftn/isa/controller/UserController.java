@@ -59,4 +59,10 @@ public class UserController {
 	public UserDTO editUser(@PathVariable Long id, @RequestBody UserDTO user) {
 		return userService.update(id, user);
 	}
+	
+	@PostMapping("/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
+	public UserDTO changePassword(@PathVariable Long id, @RequestBody UserDTO user) {
+		return userService.changePassword(id, user);
+	}
 }

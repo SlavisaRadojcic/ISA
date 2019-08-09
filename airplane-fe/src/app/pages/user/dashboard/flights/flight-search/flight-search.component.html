@@ -16,6 +16,16 @@
                 </mat-select>
             </mat-form-field>-->
 
+            <div class="item duration">
+                <div class="text">Duration:</div>
+                <mat-slider thumbLabel tickInterval="1" min="0" max="10000" [(ngModel)]="searchDTO.distanceOfFlight"></mat-slider>
+            </div>
+    
+            <div class="item price">
+                <div class="text">Price:</div>
+                <mat-slider thumbLabel tickInterval="1" min="0" max="2000" [(ngModel)]="searchDTO.ticketPrice"></mat-slider>
+            </div>
+
             <mat-form-field appearance="outline">
                 <mat-label>Class</mat-label>
                 <mat-select placeholder="Flight class" [(ngModel)]="searchDTO.flightClass">

@@ -8,7 +8,8 @@ import {
     MatIconModule,
     MatInputModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSliderModule
 } from "@angular/material";
 import {FormsModule} from "@angular/forms";
 import {FlightSearchResultModule} from "../flight-search-result/flight-search-result.module";
@@ -27,7 +28,8 @@ import { FlightSearchService } from './flight-search.service';
         MatIconModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        SeatsModule
+        SeatsModule,
+        MatSliderModule
     ],
     declarations: [
         FlightSearchComponent

@@ -33,7 +33,7 @@ export class CompanyProfileComponent implements OnInit {
     }
 
     getCompany() {
-        this.companyProfileService.getById(5).subscribe(data => {
+        this.companyProfileService.getOne().subscribe(data => {
             if (data) {
                 this.companyProfileDTO = new CompanyProfileDTO(data);
             }

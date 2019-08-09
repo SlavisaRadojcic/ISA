@@ -135,11 +135,14 @@ public class FlightServiceImpl implements FlightService {
 				flightsDTO.add(new FlightDTO(flight));
 			} else if(flight.getFlightType() != null && flight.getFlightType().equals(dto.getFlightType())) {
 				flightsDTO.add(new FlightDTO(flight));
+			} else if(flight.getTicketPrice() <= dto.getTicketPrice()) {
+				flightsDTO.add(new FlightDTO(flight));
+			} else if(flight.getDistanceOfFlight() <= dto.getDistanceOfFlight()) {
+				flightsDTO.add(new FlightDTO(flight));
 			}
 		}
 		
 		return flightsDTO;
 	}
-
 
 }

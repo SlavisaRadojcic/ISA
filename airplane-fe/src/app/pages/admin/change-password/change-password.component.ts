@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {UserProfileService} from "./../user-profile.service";
-import {UserProfileDTO} from "./../user-profile.dto";
+import {ChangePasswordService} from "./change-password.service";
+import {ChangePasswordDTO} from "./change-password.dto";
 import {Router} from "@angular/router";
+import {UserProfileDTO} from "./../../user/user-profile/user-profile.dto";
+import {UserProfileService} from "./../../user/user-profile/user-profile.service";
 
 @Component({
     selector: 'app-change-password',
@@ -10,6 +12,7 @@ import {Router} from "@angular/router";
 })
 export class ChangePasswordComponent implements OnInit {
 
+    changePasswordDTO: ChangePasswordDTO;
     userProfileDTO: UserProfileDTO;
     changePassword = {
         oldPassword: '',
@@ -17,14 +20,15 @@ export class ChangePasswordComponent implements OnInit {
     };
 
     constructor(private router: Router,
-        private userProfileService: UserProfileService) {
+                private changePasswordService: ChangePasswordService,
+                private userProfileService: UserProfileService) {
     }
 
     updateProfile(): void {
         if(this.changePassword.newPassword !== "" && this.changePassword.oldPassword === this.changePassword.newPassword)
         {
             this.userProfileDTO.password = this.changePassword.newPassword;
-            this.userProfileService.updateUser(this.userProfileDTO).subscribe(data => {
+            this.changePasswordService.updateUser(this.userProfileDTO).subscribe(data => {
                 this.router.navigate(['company-dashboard', 'company-profile']);
             });
         }

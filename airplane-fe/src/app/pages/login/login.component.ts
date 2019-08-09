@@ -40,11 +40,11 @@ export class LoginComponent implements OnInit {
 
                 if (user.role.toString() === 'ROLE_ADMIN') {
                     if(!response.firstTimeLogin) {
-                        // this.router.navigate(['change-password']);
+                        this.router.navigate(['change-password']);
                     } else {
                         this.router.navigate(['company-dashboard', 'company-profile']);
                     }
-                    this.router.navigate(['company-dashboard', 'company-profile']);
+                    // this.router.navigate(['company-dashboard', 'company-profile']);
                 } else {
                     this.router.navigate(['dashboard']);
                 }

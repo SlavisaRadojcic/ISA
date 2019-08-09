@@ -5,7 +5,8 @@ export class FlightSearchDTO {
 
     flightType: FlightTypeEnum;
     flightClass: FlightClassEnum;
-    numberOfPassengers: number;
+    ticketPrice: number;
+    distanceOfFlight: number;
     from: string;
     to: string;
     depart: Date;
@@ -15,7 +16,8 @@ export class FlightSearchDTO {
         if (data) {
             this.flightType = data.flightType;
             this.flightClass = data.flightClass;
-            this.numberOfPassengers = data.numberOfPassengers;
+            this.ticketPrice = data.ticketPrice;
+            this.distanceOfFlight = data.distanceOfFlight;
             this.from = data.from;
             this.to = data.to;
             this.depart = data.depart;

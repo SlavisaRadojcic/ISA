@@ -11,4 +11,6 @@ public interface UserService {
 	UserDTO getUserByEmail(String email);
 	
 	UserDTO update(Long id, UserDTO userDTO);
+	
+	UserDTO changePassword(Long id, UserDTO userDTO);
 }

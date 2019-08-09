@@ -71,4 +71,14 @@ public class UserServiceImpl implements UserService {
 		return userDTO;
 	}
 
+	@Override
+	public UserDTO changePassword(Long id, UserDTO userDTO) {
+		User user = userRepository.getOne(id);
+		
+		user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+		user.setFirstTimeLogin(true);
+		
+		return new UserDTO(userRepository.save(user));
+	}
+
 }

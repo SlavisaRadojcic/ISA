@@ -9,11 +9,11 @@ import {CompanyReportDTO} from "./company-report.dto";
 export class CompanyReportService {
 
     private companyUrl: string = 'http://localhost:8080/api/airplane-companies';
-    private flightUrl: string = 'http://localhost:8080/api/flight';
-    private destinationUrl: string = 'http://localhost:8080/api/destinations';
-    private seatsUrl: string = 'http://localhost:8080/api/seats';
 
     constructor(private httpClient: HttpClient) {
     }
 
+    getOne(): Observable<any> {
+        return this.httpClient.get(this.companyUrl + '/getOne');
+    }
 }
