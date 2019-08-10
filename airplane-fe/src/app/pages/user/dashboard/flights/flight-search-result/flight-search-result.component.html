@@ -27,10 +27,10 @@
                 <mat-checkbox>Business</mat-checkbox>
                 <mat-checkbox>Mixed</mat-checkbox>
             </div>
-        </div>
-
-        <button mat-button class="filter">Filter</button>
-    </div>-->
+        </div>-->
+    <div class="filter-container">
+        <button mat-button class="filter" (click)="addCompanyRating()">Rate company</button>
+    </div>
 
     <div class="mat-elevation-z8 table">
 
@@ -114,7 +114,7 @@
 
                     <div class="price-container">
                         <div class="action">
-                            <button mat-icon-button (click)="addRating(flight)">Buy ticket</button>
+                            <button mat-icon-button (click)="byTicket(flight)">Buy ticket</button>
                         </div>
                         <div class="action">
                             <button mat-icon-button (click)="addRating(flight)"><mat-icon>star</mat-icon></button>

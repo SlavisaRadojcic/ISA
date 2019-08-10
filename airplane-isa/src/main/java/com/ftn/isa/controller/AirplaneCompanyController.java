@@ -57,9 +57,9 @@ public class AirplaneCompanyController {
 		return airplaneCompanyService.save(airplaneCompany);
 	}
 
-	@GetMapping("/vote/{companyId}/{rate}")
-	@PreAuthorize("hasRole('ADMIN')")
-	public AirplaneCompanyDTO saveAirplaneCompany(@PathVariable long companyId, @PathVariable double rate) {
-		return airplaneCompanyService.vote(companyId, rate);
+	@GetMapping("/vote/{companyId}/{comapnyRate}")
+	@PreAuthorize("hasRole('USER')")
+	public AirplaneCompanyDTO saveAirplaneCompany(@PathVariable long companyId, @PathVariable double comapnyRate) {
+		return airplaneCompanyService.vote(companyId, comapnyRate);
 	}
 }

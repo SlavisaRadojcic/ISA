@@ -121,4 +121,16 @@ public class SeatServiceImpl implements SeatService {
 		return seatsDTO;
 	}
 
+	@Override
+	public SeatDTO fastReserve(long flightId) {
+		Seat seat = seatRepository.findFirstByFlightIdAndAvailable(flightId, true);
+		UserPrincipal userPrincipal = (UserPrincipal)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = userRepository.findByEmail(userPrincipal.getEmail());
+		
+		seat.setUser(user);
+		seat.setAvailable(false);
+		
+		return new SeatDTO(seatRepository.save(seat));
+	}
+
 }

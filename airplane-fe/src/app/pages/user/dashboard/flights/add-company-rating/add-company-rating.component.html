@@ -1,4 +1,4 @@
-<form #addRatingForm="ngForm" (keydown.enter)="$event.preventDefault()" novalidate>
+<form #addFlightRatingForm="ngForm" (keydown.enter)="$event.preventDefault()" novalidate>
     <div class="dialog">
         <div mat-dialog-title>
             <div class="title">Rate company</div>
@@ -13,7 +13,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Rate</mat-label>
-                <input matInput name="name" type="number" [(ngModel)]="companyRate"/>
+                <input matInput name="name" type="number" [(ngModel)]="comapnyRate"/>
             </mat-form-field>
 
         </mat-dialog-content>

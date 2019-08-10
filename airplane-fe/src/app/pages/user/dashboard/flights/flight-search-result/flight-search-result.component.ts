@@ -4,6 +4,8 @@ import {FlightSearchResultDTO} from "./flight-search-result.dto";
 import {ActivatedRoute, Router} from "@angular/router";
 import { FlightSearchService } from '../flight-search/flight-search.service';
 import {AddFlightRatingComponent} from "./../add-flight-rating/add-flight-rating.component";
+import {AddCompanyRatingComponent} from "./../add-company-rating/add-company-rating.component";
+import {SeatsService} from "./../seats/seats.service";
 
 @Component({
     selector: 'app-search-results',
@@ -17,7 +19,8 @@ export class FlightSearchResultComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private flightService: FlightSearchService,
-                private dialog: MatDialog) {
+                private dialog: MatDialog,
+                private seatsService: SeatsService) {
     }
 
     ngOnInit() {
@@ -58,6 +61,29 @@ export class FlightSearchResultComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
+                this.getFlights();
+            }
+        });
+    }
+
+    addCompanyRating() {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.hasBackdrop = true;
+        dialogConfig.panelClass = 'add-company-rating-dialog';
+
+        const dialogRef = this.dialog.open(AddCompanyRatingComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.getFlights();
+            }
+        });
+    }
+
+    byTicket(flight: FlightSearchResultDTO) {
+        this.seatsService.fastReservation(flight.id).subscribe((data: any[]) => {
+            if (data.length > 0) {
                 this.getFlights();
             }
         });

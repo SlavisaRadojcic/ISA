@@ -15,6 +15,7 @@ import {
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {AddFlightRatingComponent} from "./../add-flight-rating/add-flight-rating.component";
+import {AddCompanyRatingComponent} from "./../add-company-rating/add-company-rating.component";
 
 @NgModule({
     imports: [
@@ -33,11 +34,13 @@ import {AddFlightRatingComponent} from "./../add-flight-rating/add-flight-rating
     ],
     entryComponents: [
         FlightSearchResultComponent,
-        AddFlightRatingComponent
+        AddFlightRatingComponent,
+        AddCompanyRatingComponent
     ],
     declarations: [
         FlightSearchResultComponent,
-        AddFlightRatingComponent
+        AddFlightRatingComponent,
+        AddCompanyRatingComponent
     ],
     providers: [
     ],

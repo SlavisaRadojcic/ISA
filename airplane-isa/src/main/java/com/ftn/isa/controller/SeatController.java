@@ -62,4 +62,10 @@ public class SeatController {
 	public void deleteSeats(@RequestBody List<SeatDTO> seats) {
 		seatService.deleteSeats(seats);
 	}
+	
+	@PostMapping("/fastReserve/{flightId}")
+	@PreAuthorize("hasRole('USER')")
+	public SeatDTO fastReserve(@PathVariable long flightId) {
+		return seatService.fastReserve(flightId);
+	}
 }

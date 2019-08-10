@@ -22,7 +22,6 @@ import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
 import {AddDestinationComponent} from './add-destination/add-destination.component';
 import {AddSeatComponent} from './add-seat/add-seat.component';
 import {AuthService} from "../../../config/auth.service";
-import {AddRatingComponent} from './add-rating/add-rating.component';
 import {ChangePasswordComponent} from './../change-password/change-password.component';
 
 @NgModule({
@@ -55,7 +54,6 @@ import {ChangePasswordComponent} from './../change-password/change-password.comp
         AddFlightComponent,
         AddDestinationComponent,
         AddSeatComponent,
-        AddRatingComponent,
         ChangePasswordComponent
     ],
     declarations: [
@@ -63,7 +61,6 @@ import {ChangePasswordComponent} from './../change-password/change-password.comp
         AddFlightComponent,
         AddDestinationComponent,
         AddSeatComponent,
-        AddRatingComponent,
         ChangePasswordComponent
     ],
     exports: [
