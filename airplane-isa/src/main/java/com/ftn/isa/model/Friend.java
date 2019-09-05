@@ -26,6 +26,15 @@ public class Friend {
 	@Column(name = "id")
 	private long id;
 
+	@Column(name = "friend_id")
+	private Long friendId;
+	
+	@Column(name = "friend_firstName")
+	private String friendFirstName;
+	
+	@Column(name = "friend_lastName")
+	private String friendLastName;
+
 	@Column(name = "status")
 	private String status;
 	

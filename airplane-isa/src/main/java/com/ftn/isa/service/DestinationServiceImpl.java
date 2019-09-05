@@ -1,5 +1,11 @@
 package com.ftn.isa.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+
 import com.ftn.isa.model.AirplaneCompany;
 import com.ftn.isa.model.Destination;
 import com.ftn.isa.model.Flight;
@@ -9,27 +15,23 @@ import com.ftn.isa.payload.FlightDTO;
 import com.ftn.isa.repository.AirplaneCompanyRepository;
 import com.ftn.isa.repository.DestinationRepository;
 import com.ftn.isa.repository.FlightRepository;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class DestinationServiceImpl implements DestinationService {
 
-	@Autowired
 	AirplaneCompanyRepository airplaneCompanyRepository;
-
-	@Autowired
 	DestinationRepository destinationRepository;
-
-	@Autowired
 	FlightService flightService;
-
-	@Autowired
 	FlightRepository flightRepository;
+
+	public DestinationServiceImpl(AirplaneCompanyRepository airplaneCompanyRepository,
+			DestinationRepository destinationRepository, FlightService flightService,
+			FlightRepository flightRepository) {
+		this.airplaneCompanyRepository = airplaneCompanyRepository;
+		this.destinationRepository = destinationRepository;
+		this.flightService = flightService;
+		this.flightRepository = flightRepository;
+	}
 
 	@Override
 	public DestinationDTO save(DestinationDTO dto) {
@@ -73,7 +75,7 @@ public class DestinationServiceImpl implements DestinationService {
 	private List<DestinationDTO> getDestinationDTOs(List<Destination> destinations) {
 		List<DestinationDTO> destinationsDTO = new ArrayList<>();
 
-		for(Destination destination: destinations) {
+		for (Destination destination : destinations) {
 			List<FlightDTO> flights = flightService.getByDestinationId(destination.getId());
 			DestinationDTO destinationDTO = new DestinationDTO(destination);
 			destinationDTO.setFlights(flights);

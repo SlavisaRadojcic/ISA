@@ -1,5 +1,7 @@
 package com.ftn.isa.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +27,6 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping("/{userId}/friends")
-	@PreAuthorize("hasRole('USER')")
-	public UserDTO getFriendsByUserId(@PathVariable long userId) {
-		return userService.getUserById(userId);
-	}
-	
 	@GetMapping("/{userId}")
 	@PreAuthorize("hasRole('USER')")
 	public UserDTO getUserById(@PathVariable long userId) {
@@ -48,10 +44,16 @@ public class UserController {
 		return friendService.save(friend);
 	}
 	
-	@PostMapping("/{id}/{status}")
+	@GetMapping("/friends/{email}/{friendId}")
 	@PreAuthorize("hasRole('USER')")
-	public FriendDTO acceptFrind(@PathVariable long id, @PathVariable String status) {
-		return friendService.changeStatus(id, status);
+	public void acceptFrind(@PathVariable String email, @PathVariable Long friendId) {
+		friendService.addNewFriend(email, friendId);
+	}
+	
+	@GetMapping("/remove-friends/{email}/{friendId}")
+	@PreAuthorize("hasRole('USER')")
+	public void removeFrind(@PathVariable String email, @PathVariable Long friendId) {
+		friendService.removeFriend(email, friendId);
 	}
 	
 	@PutMapping("/{id}")
@@ -64,5 +66,17 @@ public class UserController {
 	@PreAuthorize("hasRole('ADMIN')")
 	public UserDTO changePassword(@PathVariable Long id, @RequestBody UserDTO user) {
 		return userService.changePassword(id, user);
+	}
+	
+	@GetMapping("/{email}/friends")
+	@PreAuthorize("hasRole('USER')")
+	public List<UserDTO> getFriendsByUserEmail(@PathVariable String email) {
+		return userService.getFriendList(email);
+	}
+	
+	@GetMapping("/{email}/none-friends")
+	@PreAuthorize("hasRole('USER')")
+	public List<UserDTO> getNoneFriendsByUserEmail(@PathVariable String email) {
+		return userService.getNoneFriendList(email);
 	}
 }

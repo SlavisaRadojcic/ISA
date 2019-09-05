@@ -25,6 +25,4 @@ public interface SeatService {
 	SeatDTO cancelReservation(long id);
 
 	List<SeatDTO> getAllByUserid(long id);
-	
-	SeatDTO fastReserve(long flightId);
 }

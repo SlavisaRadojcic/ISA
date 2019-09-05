@@ -3,7 +3,6 @@ package com.ftn.isa.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -15,18 +14,21 @@ import com.ftn.isa.repository.AirplaneCompanyRepository;
 @Service
 public class AirplaneCompanyServiceImpl implements AirplaneCompanyService {
 
-	@Autowired
 	AirplaneCompanyRepository airplaneCompanyRepository;
-
-	@Autowired
 	DestinationService destinationService;
+
+	public AirplaneCompanyServiceImpl(AirplaneCompanyRepository airplaneCompanyRepository,
+			DestinationService destinationService) {
+		this.airplaneCompanyRepository = airplaneCompanyRepository;
+		this.destinationService = destinationService;
+	}
 
 	@Override
 	public List<AirplaneCompanyDTO> getAll() {
 		List<AirplaneCompany> airplaneCompanies = airplaneCompanyRepository.findAll();
 		List<AirplaneCompanyDTO> dtos = new ArrayList<>();
 
-		for(AirplaneCompany airplaneCompany: airplaneCompanies) {
+		for (AirplaneCompany airplaneCompany : airplaneCompanies) {
 			AirplaneCompanyDTO dto = new AirplaneCompanyDTO(airplaneCompany);
 			List<DestinationDTO> destinationDTOS = destinationService.getAll();
 			dto.setDestinations(destinationDTOS);
@@ -41,11 +43,11 @@ public class AirplaneCompanyServiceImpl implements AirplaneCompanyService {
 	@Override
 	public AirplaneCompanyDTO save(AirplaneCompanyDTO dto) {
 		AirplaneCompany airplaneCompany = new AirplaneCompany();
-		if(dto.getId() != null) {
+		if (dto.getId() != null) {
 			airplaneCompany.setId(dto.getId());
 		}
 		airplaneCompany.setAddress(dto.getAddress());
-		if(dto.getId() == null) {
+		if (dto.getId() == null) {
 			airplaneCompany.setAvrageRate(0);
 		} else {
 			airplaneCompany.setAvrageRate(dto.getAvrageRate());
@@ -92,7 +94,7 @@ public class AirplaneCompanyServiceImpl implements AirplaneCompanyService {
 	public AirplaneCompanyDTO vote(long companyId, double rate) {
 		AirplaneCompany company = airplaneCompanyRepository.getOne(companyId);
 
-		if(company.getAvrageRate() == 0) {
+		if (company.getAvrageRate() == 0) {
 			company.setAvrageRate(rate);
 		} else {
 			company.setAvrageRate((company.getAvrageRate() + rate) / 2);
@@ -111,6 +113,5 @@ public class AirplaneCompanyServiceImpl implements AirplaneCompanyService {
 
 		return dto;
 	}
-
 
 }

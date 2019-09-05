@@ -15,6 +15,4 @@ public interface SeatRepository extends JpaRepository<Seat, Long>{
 	List<Seat> findByDiscounted(boolean discounted);
 	
 	List<Seat> findByUserId(long id);
-	
-	Seat findFirstByFlightIdAndAvailable(long flightId, boolean available);
 }

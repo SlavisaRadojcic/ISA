@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {UserProfileComponent} from "./pages/user/user-profile/user-profile.component";
+import {FriendsComponent} from "./pages/user/friends/friends.component";
 import {CompanyProfileComponent} from "./pages/admin/company-profile/company-profile.component";
 import {CompanyReportComponent} from "./pages/admin/company-report/company-report.component";
 import {LoginComponent} from "./pages/login/login.component";
@@ -59,6 +60,10 @@ const routes: Routes = [
             {
                 path: 'user-profile',
                 component: UserProfileComponent
+            },
+            {
+                path: 'friends',
+                component: FriendsComponent
             }
         ]
     },
@@ -83,7 +88,6 @@ const routes: Routes = [
                 path: 'user-profile',
                 component: UserProfileComponent
             }
-
         ]
     }
 ];

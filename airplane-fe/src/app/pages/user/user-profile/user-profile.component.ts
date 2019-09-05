@@ -42,4 +42,8 @@ export class UserProfileComponent implements OnInit {
         this.userProfileService.getProfileByEmail(user.email).subscribe((user: UserProfileDTO) => this.userProfileDTO = new UserProfileDTO(user));
     }
 
+
+    friendList() {
+        this.router.navigate(['dashboard', 'friends']);
+    }
 }

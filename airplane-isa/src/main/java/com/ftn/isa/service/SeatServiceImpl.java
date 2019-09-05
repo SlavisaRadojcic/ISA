@@ -9,7 +9,6 @@ import com.ftn.isa.repository.SeatRepository;
 import com.ftn.isa.repository.UserRepository;
 import com.ftn.isa.security.UserPrincipal;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -19,21 +18,23 @@ import java.util.List;
 @Service
 public class SeatServiceImpl implements SeatService {
 
-	@Autowired
 	SeatRepository seatRepository;
-
-	@Autowired
 	UserRepository userRepository;
-
-	@Autowired
 	FlightRepository flightRepository;
+
+	public SeatServiceImpl(SeatRepository seatRepository, UserRepository userRepository,
+			FlightRepository flightRepository) {
+		this.seatRepository = seatRepository;
+		this.userRepository = userRepository;
+		this.flightRepository = flightRepository;
+	}
 
 	@Override
 	public List<SeatDTO> getAllByFlightId(long id) {
 		List<Seat> seats = seatRepository.findByFlightId(id);
 		List<SeatDTO> seatsDTO = new ArrayList<>();
 
-		for(Seat seat: seats) {
+		for (Seat seat : seats) {
 			seatsDTO.add(new SeatDTO(seat));
 		}
 
@@ -59,7 +60,7 @@ public class SeatServiceImpl implements SeatService {
 
 	@Override
 	public List<SeatDTO> saveList(List<SeatDTO> seatsDTO) {
-		for(SeatDTO seatDTO: seatsDTO) {
+		for (SeatDTO seatDTO : seatsDTO) {
 			this.save(seatDTO);
 		}
 
@@ -85,7 +86,8 @@ public class SeatServiceImpl implements SeatService {
 
 	@Override
 	public SeatDTO reserve(long id) {
-		UserPrincipal userPrincipal = (UserPrincipal)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
 		User user = userRepository.findByEmail(userPrincipal.getEmail());
 
 		Seat seat = seatRepository.getOne(id);
@@ -114,23 +116,11 @@ public class SeatServiceImpl implements SeatService {
 		List<Seat> seats = seatRepository.findByUserId(id);
 		List<SeatDTO> seatsDTO = new ArrayList<>();
 
-		for(Seat seat: seats) {
+		for (Seat seat : seats) {
 			seatsDTO.add(new SeatDTO(seat));
 		}
 
 		return seatsDTO;
-	}
-
-	@Override
-	public SeatDTO fastReserve(long flightId) {
-		Seat seat = seatRepository.findFirstByFlightIdAndAvailable(flightId, true);
-		UserPrincipal userPrincipal = (UserPrincipal)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		User user = userRepository.findByEmail(userPrincipal.getEmail());
-		
-		seat.setUser(user);
-		seat.setAvailable(false);
-		
-		return new SeatDTO(seatRepository.save(seat));
 	}
 
 }

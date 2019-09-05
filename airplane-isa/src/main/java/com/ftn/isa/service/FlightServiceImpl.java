@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.isa.model.Destination;
@@ -19,13 +18,15 @@ import com.ftn.isa.repository.FlightRepository;
 @Service
 public class FlightServiceImpl implements FlightService {
 
-	@Autowired
 	FlightRepository flightRepository;
-
-	@Autowired
 	DestinationRepository destinationRepository;
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+	
+	public FlightServiceImpl(FlightRepository flightRepository, DestinationRepository destinationRepository) {
+		this.flightRepository = flightRepository;
+		this.destinationRepository = destinationRepository;
+	}
 
 	@Override
 	public List<FlightDTO> getAll() {

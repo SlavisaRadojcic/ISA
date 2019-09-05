@@ -23,8 +23,4 @@ export class SeatsService {
         return this.httpClient.post(`${this.seatsUrl}/reserve/${seatId}`, null);
     }
 
-    fastReservation(flightId: number): Observable<any> {
-        return this.httpClient.post(`${this.seatsUrl}/fastReserve/${flightId}`, null);
-    }
-
 }

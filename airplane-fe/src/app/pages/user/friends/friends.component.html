@@ -1,0 +1,37 @@
+<div class="user-profile">
+
+    <div class="table-content">
+        <mat-divider></mat-divider>
+        <div *ngFor="let nonFriend of datasource">
+            <div class="item-container">
+                <div class="item-with-price">
+                    <div class="item">
+                        <div class="stops">
+                            {{ nonFriend.firstName + ' ' + nonFriend.lastName }}
+
+                            <button mat-icon-button (click)="addFriend(nonFriend)">Add to friend</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngFor="let friend of datasourceFriends">
+            <div class="item-container">
+                <div class="item-with-price">
+                    <div class="item">
+                        <div class="stops">
+                            {{ friend.firstName + ' ' + friend.lastName }}
+
+                            <button mat-icon-button (click)="removeFriend(friend)">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="datasource.length == 0">
+            <button mat-icon-button (click)="getAllNonFriends()">Add new friends</button>
+        </div>
+
+</div>
