@@ -30,4 +30,9 @@ export class FriendsService {
         let friendId = friend.id;
         return this.httpClient.get(this.url + '/remove-friends/' + email + '/' + friendId);
     }
+
+    acceptFriend(friend: UserProfileDTO, email: string): Observable<any> {
+        let friendId = friend.id;
+        return this.httpClient.get(this.url + '/accept-friends/' + email + '/' + friendId);
+    }
 }

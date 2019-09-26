@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ftn.isa.model.AirplaneCompany;
 import com.ftn.isa.payload.AirplaneCompanyDTO;
@@ -12,6 +13,7 @@ import com.ftn.isa.payload.DestinationDTO;
 import com.ftn.isa.repository.AirplaneCompanyRepository;
 
 @Service
+@Transactional
 public class AirplaneCompanyServiceImpl implements AirplaneCompanyService {
 
 	AirplaneCompanyRepository airplaneCompanyRepository;

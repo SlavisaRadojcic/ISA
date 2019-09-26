@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ftn.isa.model.AirplaneCompany;
 import com.ftn.isa.model.Destination;
@@ -17,6 +18,7 @@ import com.ftn.isa.repository.DestinationRepository;
 import com.ftn.isa.repository.FlightRepository;
 
 @Service
+@Transactional
 public class DestinationServiceImpl implements DestinationService {
 
 	AirplaneCompanyRepository airplaneCompanyRepository;

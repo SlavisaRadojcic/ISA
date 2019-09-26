@@ -21,8 +21,9 @@
                 <div class="item-with-price">
                     <div class="item">
                         <div class="stops">
-                            {{ friend.firstName + ' ' + friend.lastName }}
+                            {{ friend.friendFirstName + ' ' + friend.friendLastName }}
 
+                            <button *ngIf="friend.status == 'waiting'" mat-icon-button (click)="acceptFriend(friend)">Accept</button>
                             <button mat-icon-button (click)="removeFriend(friend)">Remove</button>
                         </div>
                     </div>

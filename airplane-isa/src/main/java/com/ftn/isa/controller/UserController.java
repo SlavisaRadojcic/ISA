@@ -53,7 +53,7 @@ public class UserController {
 	@GetMapping("/remove-friends/{email}/{friendId}")
 	@PreAuthorize("hasRole('USER')")
 	public void removeFrind(@PathVariable String email, @PathVariable Long friendId) {
-		friendService.removeFriend(email, friendId);
+		friendService.friendCancelled(email, friendId);
 	}
 	
 	@PutMapping("/{id}")
@@ -70,7 +70,7 @@ public class UserController {
 	
 	@GetMapping("/{email}/friends")
 	@PreAuthorize("hasRole('USER')")
-	public List<UserDTO> getFriendsByUserEmail(@PathVariable String email) {
+	public List<FriendDTO> getFriendsByUserEmail(@PathVariable String email) {
 		return userService.getFriendList(email);
 	}
 	
@@ -78,5 +78,11 @@ public class UserController {
 	@PreAuthorize("hasRole('USER')")
 	public List<UserDTO> getNoneFriendsByUserEmail(@PathVariable String email) {
 		return userService.getNoneFriendList(email);
+	}
+	
+	@GetMapping("/accept-friends/{email}/{friendId}")
+	@PreAuthorize("hasRole('USER')")
+	public void acceptFrindConfirm(@PathVariable String email, @PathVariable Long friendId) {
+		friendService.friendAccepted(email, friendId);
 	}
 }

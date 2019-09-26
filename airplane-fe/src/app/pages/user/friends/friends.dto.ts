@@ -5,14 +5,14 @@ export class FriendsDTO {
     status: string;
     friendFirstName: string;
     friendLastName: string;
-    user: UserProfileDTO;
+    // user: UserProfileDTO;
 
     constructor(data?: any) {
         if (data) {
             this.status = data.status;
             this.friendFirstName = data.friendFirstName;
             this.friendLastName = data.friendLastName;
-            this.user = data.user;
+            // this.user = data.user;
         }
     }
 

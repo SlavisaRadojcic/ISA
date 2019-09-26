@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 export class FriendsComponent implements OnInit {
 
     datasource: UserProfileDTO[] = [];
-    datasourceFriends: UserProfileDTO[] = [];
+    datasourceFriends: FriendsDTO[] = [];
 
     constructor(private router: Router,
         private friendsService: FriendsService) {
@@ -21,10 +21,8 @@ export class FriendsComponent implements OnInit {
     ngOnInit() {
         let user = JSON.parse(localStorage.getItem('user'));
         this.friendsService.getFriendList(user.email).subscribe((data: any[]) => {
-            if (data.length > 0) {
                 this.datasourceFriends = data;
                 this.datasource = [];
-            }
         });
     }
 
@@ -36,16 +34,19 @@ export class FriendsComponent implements OnInit {
     getAllNonFriends() {
         let user = JSON.parse(localStorage.getItem('user'));
         this.friendsService.getNoneFriendList(user.email).subscribe((data: any[]) => {
-            if (data.length > 0) {
                 this.datasourceFriends = [];
                 this.datasource = data;
-            }
         });
     }
 
     removeFriend(friend: UserProfileDTO) {
         let user = JSON.parse(localStorage.getItem('user'));
         this.friendsService.removeFriend(friend, user.email).subscribe((data: any[]) => { });
+    }
+
+    acceptFriend(friend: UserProfileDTO) {
+        let user = JSON.parse(localStorage.getItem('user'));
+        this.friendsService.acceptFriend(friend, user.email).subscribe((data: any[]) => { });
     }
 
 }

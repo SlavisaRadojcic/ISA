@@ -11,11 +11,13 @@ import com.ftn.isa.security.UserPrincipal;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class SeatServiceImpl implements SeatService {
 
 	SeatRepository seatRepository;
@@ -121,6 +123,26 @@ public class SeatServiceImpl implements SeatService {
 		}
 
 		return seatsDTO;
+	}
+
+	@Override
+	public SeatDTO fastReservation(long flightId) {
+		List<Seat> seats = seatRepository.findByFlightId(flightId);
+		
+		for(Seat seat: seats) {
+			if(seat.isAvailable()) {
+				UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication()
+						.getPrincipal();
+				User user = userRepository.findByEmail(userPrincipal.getEmail());
+
+				seat.setAvailable(false);
+				seat.setUser(user);
+				
+				return new SeatDTO(seatRepository.save(seat));
+			}
+		}
+		
+		return null;
 	}
 
 }

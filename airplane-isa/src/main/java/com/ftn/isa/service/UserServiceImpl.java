@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ftn.isa.model.Friend;
 import com.ftn.isa.model.Role;
@@ -19,6 +20,7 @@ import com.ftn.isa.payload.UserDTO;
 import com.ftn.isa.repository.UserRepository;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -93,27 +95,27 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public List<UserDTO> getFriendList(String email) {
+	public List<FriendDTO> getFriendList(String email) {
 		User user = userRepository.findByEmail(email);
-		Role role = user.getRoles().iterator().next();
-		List<User> users = userRepository.findAll().stream()
-				.filter(u -> u.getId() != user.getId() && role.getName().equals(RoleName.ROLE_USER))
-				.collect(Collectors.toList());
+//		Role role = user.getRoles().iterator().next();
+//		List<User> users = userRepository.findAll().stream()
+//				.filter(u -> u.getId() != user.getId() && role.getName().equals(RoleName.ROLE_USER))
+//				.collect(Collectors.toList());
+//
+//		List<User> usersHelper = new ArrayList<>();
+//		for (Friend friend : user.getFriends()) {
+//			for(int i=0; i < users.size(); i++) {
+//				if (friend.getFriendId() == users.get(i).getId())
+//					usersHelper.add(users.get(i));
+//			}
+//		}
 
-		List<User> usersHelper = new ArrayList<>();
-		for (Friend friend : user.getFriends()) {
-			for(int i=0; i < users.size(); i++) {
-				if (friend.getFriendId() == users.get(i).getId())
-					usersHelper.add(users.get(i));
-			}
+		List<FriendDTO> friendDTOs = new ArrayList<>();
+		for (Friend f : user.getFriends()) {
+			friendDTOs.add(new FriendDTO(f));
 		}
 
-		List<UserDTO> userDTOs = new ArrayList<>();
-		for (User u : usersHelper) {
-			userDTOs.add(new UserDTO(u));
-		}
-
-		return userDTOs;
+		return friendDTOs;
 	}
 
 	@Override

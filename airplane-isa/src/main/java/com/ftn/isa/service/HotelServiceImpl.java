@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ftn.isa.model.Hotel;
 import com.ftn.isa.repository.HotelRepository;
 
 @Service
+@Transactional
 public class HotelServiceImpl implements HotelService {
 
 	@Autowired

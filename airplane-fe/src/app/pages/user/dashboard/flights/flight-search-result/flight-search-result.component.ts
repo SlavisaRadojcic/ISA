@@ -78,4 +78,8 @@ export class FlightSearchResultComponent implements OnInit {
             }
         });
     }
+
+    reserveFliht(flight: FlightSearchResultDTO) {
+        this.flightService.reserveFlight(flight.id).subscribe((data: any[]) => { });
+    }
 }

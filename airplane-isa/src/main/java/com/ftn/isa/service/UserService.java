@@ -2,6 +2,7 @@ package com.ftn.isa.service;
 
 import java.util.List;
 
+import com.ftn.isa.payload.FriendDTO;
 import com.ftn.isa.payload.UserDTO;
 
 public interface UserService {
@@ -16,7 +17,7 @@ public interface UserService {
 	
 	UserDTO changePassword(Long id, UserDTO userDTO);
 	
-	List<UserDTO> getFriendList(String email);
+	List<FriendDTO> getFriendList(String email);
 	
 	List<UserDTO> getNoneFriendList(String email);
 }

@@ -17,4 +17,8 @@ public interface FriendService {
 	void addNewFriend(String userMail, Long friendId);
 	
 	void removeFriend(String userMail, Long friendId);
+	
+	void friendAccepted(String userMail, Long friendId);
+	
+	void friendCancelled(String userMail, Long friendId);
 }

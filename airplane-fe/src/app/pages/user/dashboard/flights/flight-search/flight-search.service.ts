@@ -9,6 +9,7 @@ import {FlightSearchDTO} from "./flight-search.dto";
 export class FlightSearchService {
 
     getAllUrl: string = 'http://localhost:8080/api/flight';
+    seatUrl: string = 'http://localhost:8080/api/seats';
 
     constructor(private httpClient: HttpClient) {
     }
@@ -28,5 +29,8 @@ export class FlightSearchService {
     rateFlight(flightId: number, rating: number): Observable<any> {
         return this.httpClient.get(this.getAllUrl + '/vote/' + flightId + '/' + rating);
     }
-
+    
+    reserveFlight(flightId: number): Observable<any> {
+        return this.httpClient.get(this.seatUrl + "/fastReservation/" + flightId);
+    }
 }

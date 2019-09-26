@@ -11,4 +11,6 @@ import com.ftn.isa.model.Friend;
 public interface FriendRepository extends JpaRepository<Friend, Long> {
 
 	List<Friend> getByUserId(long userId);
+	
+	Friend findByFriendIdAndUserId(long friendId, long userId);
 }

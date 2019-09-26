@@ -19,7 +19,7 @@ public class UserDTO {
 	private Integer score;
 	private String city;
 	private List<FriendDTO> friends = new ArrayList<>();
-	private Role role;
+//	private Role role;
 
 	public UserDTO() {
 	}
@@ -128,13 +128,13 @@ public class UserDTO {
 	public void setFriends(List<FriendDTO> friends) {
 		this.friends = friends;
 	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
+	
+//	public Role getRole() {
+//		return role;
+//	}
+//
+//	public void setRole(Role role) {
+//		this.role = role;
+//	}
 	
 }

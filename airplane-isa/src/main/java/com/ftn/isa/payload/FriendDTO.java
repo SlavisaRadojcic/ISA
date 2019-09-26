@@ -13,13 +13,10 @@ public class FriendDTO {
 
 	public FriendDTO() {}
 	
-	public FriendDTO(String status, UserDTO userDTO, Long friendId, String friendName, String friendLastName) {
-		if(status == null) 
-			status = "Not friends";
-		else
-			this.status = status;
+	public FriendDTO(Long id, String status, UserDTO userDTO, Long friendId, String friendName, String friendLastName) {
+		this.id = id;
+		this.status = status;
 		this.user = userDTO;
-		
 		this.friendId = friendId;
 		this.friendFirstName = friendName;
 		this.friendLastName = friendLastName;

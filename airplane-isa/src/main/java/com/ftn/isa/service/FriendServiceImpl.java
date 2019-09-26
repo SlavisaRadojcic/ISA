@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ftn.isa.model.Friend;
 import com.ftn.isa.model.User;
@@ -13,6 +14,7 @@ import com.ftn.isa.repository.FriendRepository;
 import com.ftn.isa.repository.UserRepository;
 
 @Service
+@Transactional
 public class FriendServiceImpl implements FriendService {
 
 	FriendRepository friendRepository;
@@ -68,14 +70,14 @@ public class FriendServiceImpl implements FriendService {
 		fri.setFriendFirstName(friend.getFirstName());
 		fri.setFriendLastName(friend.getLastName());
 		fri.setFriendId(friendId);
-		fri.setStatus("accepted");
+		fri.setStatus("requested");
 		fri.setUser(user);
 		
 		Friend otherFriend = new Friend();
 		otherFriend.setFriendFirstName(user.getFirstName());
 		otherFriend.setFriendLastName(user.getLastName());
 		otherFriend.setFriendId(user.getId());
-		otherFriend.setStatus("accepted");
+		otherFriend.setStatus("waiting");
 		otherFriend.setUser(friend);
 		
 		friendRepository.save(fri);
@@ -98,6 +100,30 @@ public class FriendServiceImpl implements FriendService {
 				friendRepository.deleteById(f.getId());
 			}
 		}
+	}
+
+	@Override
+	public void friendAccepted(String userMail, Long friendId) {
+		User user = userRepository.findByEmail(userMail);
+		Friend friendToAccept = friendRepository.findById(friendId).get();
+		Friend otherFriendToAccept = friendRepository.findByFriendIdAndUserId(user.getId(), friendToAccept.getFriendId());
+		
+		friendToAccept.setStatus("accepted");
+		otherFriendToAccept.setStatus("accepted");
+		
+		friendRepository.save(friendToAccept);
+		friendRepository.save(otherFriendToAccept);
+		
+	}
+
+	@Override
+	public void friendCancelled(String userMail, Long friendId) {
+		User user = userRepository.findByEmail(userMail);
+		Friend friendToAccept = friendRepository.findById(friendId).get();
+		Friend otherFriendToAccept = friendRepository.findByFriendIdAndUserId(user.getId(), friendToAccept.getFriendId());
+		
+		friendRepository.deleteById(friendToAccept.getId());
+		friendRepository.deleteById(otherFriendToAccept.getId());
 	}
 
 }
