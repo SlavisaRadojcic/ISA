@@ -62,6 +62,8 @@ Pokretanje aplikacije:
 
 
 
+Autor: Radojèiæ Slaviša(slavisaa.radojcic@gmail.com)
+
 
 
 
