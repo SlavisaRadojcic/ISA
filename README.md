@@ -49,7 +49,15 @@ Nakon instaliranja alata, sledi podešavanje:
 * U toolbaru izaberite opciju Terminal i u slide bar-u opciju New Terminal. Otvori?e se terminalu u panelu sa desne strane File Explorer-a. U terminalu ukucajte npm install da bi se potrebne Angular zavisnosti instalirale. Nakon instalacije ukucajte u terminal ng serve za pokretanje Angular aplikacije
 * Podešavanje MySql WorkBench-a: U glavnom prozoru, izabere ikonicu  +  pored MySqlConnections labele tj. start new connection. U dijalogu ukucajte ime svoje konekcije i podesite sifru. Izaberite opciju Test Connection u donjem delu prozora da biste potvrdili da je konekcija mogu?a. Pošto je konekcija podešena, ona se nalazi u glavnom prozoru pod imenom koje ste jos zadali. Izaberite svoju konekciju i u dijalogu ukucajte šifru koju ste izabrali.
 
-* Pravljenje šeme i sql skripte:  U novootvorenom prozoru, u toolbaru izaberite 
+* Pravljenje šeme i sql skripte:  U novootvorenom prozoru, u toolbaru sa ikonicama, ispod toolbara sa File i ostalim teksutalnim opcijama, prona?i opciju Create a new Schema on connected Server i u dijalogu joj dati ime aiplane_isa.
+
+
+
+Pokretanje aplikacije:
+* U Eclipse IDE, u projektu airplane-isa,  u src/main/java paketu prona?i com.ftn.isa paket i u njemu App.java fajl. Desnim klikom na App.java se otvara meni u kome izaberite opciju Run as>>Java Application. Sa?ekajte da se aplikacija pokrene u konzoli.
+* U MySql WorkBench, u prozoru u kojem smo napravili šemu u toolbaru izaberite opciju FIle>>Run SQL script i u folderu projekta izaberite skripta sql. Ovaj postupak ce popuniti tablice osnovnim podacima
+
+* U adress bar-u svog browser-a, ukucajte localhost:4200 i time ?ete pokrenuti celokupnu aplikaciju.
 
 
 
