@@ -8,9 +8,10 @@ export class SeatDTO {
     discounted: boolean = false;
     available: boolean = false;
     selected: boolean = false;
-    user: number = 0;
+    user: UserProfileDTO;
     isNew: boolean = false;
     isDeleted: boolean = false;
+    version: number = 0;
 
     constructor(data?: any) {
         if (data) {
@@ -23,6 +24,7 @@ export class SeatDTO {
             this.user = data.user;
             this.isNew = data.isNew;
             this.isDeleted = data.isDeleted;
+            this.version = data.version;
         }
     }
 }

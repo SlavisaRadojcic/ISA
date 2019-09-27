@@ -92,7 +92,7 @@ export class AddSeatComponent implements OnInit {
 
         for (let i = 0; i < 6; i++) {
             const newSeat: SeatDTO = new SeatDTO();
-            newSeat.user = this.user.id;
+            newSeat.user = this.user;
             newSeat.available = true;
             newSeat.discounted = false;
             newSeat.name = `${rowNumber}${this.seatNameLetters[i]}`;
