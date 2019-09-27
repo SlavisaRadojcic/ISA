@@ -8,7 +8,7 @@ export class SeatDTO {
     discounted: boolean = false;
     available: boolean = false;
     selected: boolean = false;
-    user: UserProfileDTO = new UserProfileDTO();
+    user: number = 0;
     isNew: boolean = false;
     isDeleted: boolean = false;
 

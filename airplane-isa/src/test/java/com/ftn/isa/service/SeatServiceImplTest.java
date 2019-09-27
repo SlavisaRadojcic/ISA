@@ -86,7 +86,7 @@ class SeatServiceImplTest {
 	void reserveSeatTest() {
 		Seat seat = new Seat();
 		User user = new User();
-		seat.setUser(user);
+		seat.setUser((int) user.getId());
 		seat.setAvailable(false);
 		
 		when(seatRepository.save(any(Seat.class))).thenReturn(seat);

@@ -14,5 +14,5 @@ public interface SeatRepository extends JpaRepository<Seat, Long>{
 	
 	List<Seat> findByDiscounted(boolean discounted);
 	
-	List<Seat> findByUserId(long id);
+	List<Seat> findByUser(long id);
 }

@@ -69,7 +69,7 @@ export class SeatsComponent implements OnInit {
                         .find((flightSeat: SeatDTO) => flightSeat.id === seat.id);
                     if (reservedSeat) {
                         reservedSeat.available = false;
-                        reservedSeat.user = this.user;
+                        reservedSeat.user = this.user.id;
 
                         reservedSeats.push(reservedSeat);
                     }

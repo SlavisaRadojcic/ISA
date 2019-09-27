@@ -94,7 +94,7 @@ public class SeatServiceImpl implements SeatService {
 
 		Seat seat = seatRepository.getOne(id);
 		seat.setAvailable(false);
-		seat.setUser(user);
+		seat.setUser((int) user.getId());
 
 		return new SeatDTO(seatRepository.save(seat));
 	}
@@ -115,7 +115,7 @@ public class SeatServiceImpl implements SeatService {
 
 	@Override
 	public List<SeatDTO> getAllByUserid(long id) {
-		List<Seat> seats = seatRepository.findByUserId(id);
+		List<Seat> seats = seatRepository.findByUser(id);
 		List<SeatDTO> seatsDTO = new ArrayList<>();
 
 		for (Seat seat : seats) {
@@ -136,7 +136,7 @@ public class SeatServiceImpl implements SeatService {
 				User user = userRepository.findByEmail(userPrincipal.getEmail());
 
 				seat.setAvailable(false);
-				seat.setUser(user);
+				seat.setUser((int) user.getId());
 				
 				return new SeatDTO(seatRepository.save(seat));
 			}

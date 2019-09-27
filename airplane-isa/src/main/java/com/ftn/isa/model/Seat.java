@@ -9,8 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.springframework.data.annotation.Version;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -43,9 +42,10 @@ public class Seat {
 	private Flight flight;
 	
 	@Version
-	@JsonBackReference(value = "user_reference")
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_user")
-	private User user;
+//	@JsonBackReference(value = "user_reference")
+//	@ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "fk_user")
+	@Column(name = "fk_user")
+	private Integer user;
 
 }
