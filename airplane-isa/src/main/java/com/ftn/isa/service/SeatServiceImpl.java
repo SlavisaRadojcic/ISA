@@ -94,7 +94,7 @@ public class SeatServiceImpl implements SeatService {
 
 		Seat seat = seatRepository.getOne(id);
 		seat.setAvailable(false);
-		seat.setUser((int) user.getId());
+		seat.setUser(user);
 
 		return new SeatDTO(seatRepository.save(seat));
 	}
@@ -136,7 +136,7 @@ public class SeatServiceImpl implements SeatService {
 				User user = userRepository.findByEmail(userPrincipal.getEmail());
 
 				seat.setAvailable(false);
-				seat.setUser((int) user.getId());
+				seat.setUser(user);
 				
 				return new SeatDTO(seatRepository.save(seat));
 			}

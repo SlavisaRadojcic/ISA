@@ -9,7 +9,8 @@ public class SeatDTO {
 	private String name;
 	private boolean discounted;
 	private boolean available;
-	private Integer user;
+	private UserDTO user;
+	private Integer version;
 
 	public SeatDTO() {
 	}
@@ -20,7 +21,12 @@ public class SeatDTO {
 		this.flightId = seat.getFlight().getId();
 		this.discounted = seat.isDiscounted();
 		this.available = seat.isAvailable();
-		this.user = seat.getUser();
+		
+		if(seat.getUser() != null) {
+			this.user = new UserDTO(seat.getUser());
+		}
+		
+		this.version = seat.getVersion();
 	}
 
 	public Long getId() {
@@ -63,11 +69,19 @@ public class SeatDTO {
 		this.available = available;
 	}
 
-	public Integer getUser() {
+	public UserDTO getUser() {
 		return user;
 	}
 
-	public void setUser(Integer user) {
+	public void setUser(UserDTO user) {
 		this.user = user;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 }
